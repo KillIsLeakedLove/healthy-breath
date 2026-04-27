@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>身体扫描 - Healthy Breath</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="page-body">
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="../index.html" class="nav-back">&#8592;</a>
+      <span class="nav-title">身体扫描</span>
+    </div>
+    <a href="../index.html" class="nav-home-link">主页</a>
+  </nav>
+
+  <div class="page-content">
+    <h1 class="page-title">身体扫描</h1>
+    <p class="page-subtitle">3 分钟正念放松 &#183; 觉察身体</p>
+    <p class="page-desc">源自正念减压疗法（MBSR）。将注意力依次移到身体各部位，觉察感受而不评判，是缓解焦虑的经典方法。</p>
+
+    <div class="exercise-area">
+      <div class="body-scan-figure">
+        <div class="scan-head"></div>
+        <div class="scan-body">
+          <div class="scan-highlight" id="scanHighlight" style="top:0"></div>
+        </div>
+      </div>
+
+      <div class="exercise-guide-text" id="guideText">找一个舒适的坐姿，闭上眼睛，点击开始</div>
+      <div class="exercise-timer" id="timer">3:00</div>
+
+      <div class="controls">
+        <button class="btn btn-start" id="actionBtn">开始</button>
+      </div>
+    </div>
+
+    <div class="instruction-card">
+      <h3>扫描顺序</h3>
+      <div class="breath-flow">
+        <div class="flow-step"><div class="step-icon">头</div><div class="step-name">30秒</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon">颈</div><div class="step-name">30秒</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon">肩</div><div class="step-name">30秒</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon">胸</div><div class="step-name">30秒</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon">腹</div><div class="step-name">30秒</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon">腿</div><div class="step-name">30秒</div></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const scanHighlight = document.getElementById('scanHighlight');
+    const guideText = document.getElementById('guideText');
+    const timer = document.getElementById('timer');
+    const actionBtn = document.getElementById('actionBtn');
+
+    const SEGMENTS = [
+      { name: '感受头顶、额头和面部', top: '0px', duration: 30000 },
+      { name: '感受颈部和喉咙', top: '30px', duration: 30000 },
+      { name: '感受双肩和上背部', top: '60px', duration: 30000 },
+      { name: '感受胸腔和呼吸', top: '90px', duration: 30000 },
+      { name: '感受腹部和内脏', top: '120px', duration: 30000 },
+      { name: '感受双腿和双脚', top: '150px', duration: 30000 }
+    ];
+
+    let isRunning = false;
+    let isPaused = false;
+    let currentSeg = 0;
+    let totalMs = 0;
+    let segTimer = null;
+    let updateInterval = null;
+    let startTime = 0;
+    let pausedElapsed = 0;
+
+    function updateTimer() {
+      if (!isRunning || isPaused) return;
+      const elapsed = Date.now() - startTime + pausedElapsed;
+      const remaining = Math.max(0, 180000 - elapsed);
+      const m = Math.floor(remaining / 60000).toString();
+      const s = Math.floor((remaining % 60000) / 1000).toString().padStart(2, '0');
+      timer.textContent = `${m}:${s}`;
+      if (remaining <= 0) {
+        finish();
+      }
+    }
+
+    function runSegment() {
+      if (!isRunning || isPaused) return;
+      if (currentSeg >= SEGMENTS.length) {
+        finish();
+        return;
+      }
+      const seg = SEGMENTS[currentSeg];
+      guideText.textContent = seg.name;
+      scanHighlight.style.top = seg.top;
+
+      segTimer = setTimeout(() => {
+        currentSeg++;
+        runSegment();
+      }, seg.duration);
+    }
+
+    function start() {
+      isRunning = true;
+      isPaused = false;
+      currentSeg = 0;
+      totalMs = 0;
+      pausedElapsed = 0;
+      startTime = Date.now();
+      actionBtn.textContent = '暂停';
+      actionBtn.classList.remove('btn-start', 'btn-restart');
+      actionBtn.classList.add('btn-pause');
+
+      updateInterval = setInterval(updateTimer, 500);
+      runSegment();
+    }
+
+    function pause() {
+      isPaused = true;
+      clearTimeout(segTimer);
+      clearInterval(updateInterval);
+      pausedElapsed += Date.now() - startTime;
+      guideText.textContent = '已暂停';
+      actionBtn.textContent = '继续';
+      actionBtn.classList.remove('btn-pause');
+      actionBtn.classList.add('btn-start');
+    }
+
+    function resume() {
+      isPaused = false;
+      actionBtn.textContent = '暂停';
+      actionBtn.classList.remove('btn-start');
+      actionBtn.classList.add('btn-pause');
+      guideText.textContent = SEGMENTS[currentSeg].name;
+      startTime = Date.now();
+      updateInterval = setInterval(updateTimer, 500);
+
+      const seg = SEGMENTS[currentSeg];
+      segTimer = setTimeout(() => {
+        currentSeg++;
+        runSegment();
+      }, seg.duration);
+    }
+
+    function finish() {
+      isRunning = false;
+      clearTimeout(segTimer);
+      clearInterval(updateInterval);
+      guideText.textContent = '扫描完成。慢慢睁开眼睛';
+      timer.textContent = '完成';
+      scanHighlight.style.opacity = '0';
+      actionBtn.textContent = '再来一次';
+      actionBtn.classList.remove('btn-pause');
+      actionBtn.classList.add('btn-restart');
+    }
+
+    actionBtn.addEventListener('click', () => {
+      const text = actionBtn.textContent;
+      if (text === '开始' || text === '再来一次') start();
+      else if (text === '暂停') pause();
+      else if (text === '继续') resume();
+    });
+  </script>
+</body>
+</html>

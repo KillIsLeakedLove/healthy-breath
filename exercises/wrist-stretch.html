@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手腕伸展 - Healthy Breath</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="page-body">
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="../index.html" class="nav-back">&#8592;</a>
+      <span class="nav-title">手腕伸展</span>
+    </div>
+    <a href="../index.html" class="nav-home-link">主页</a>
+  </nav>
+
+  <div class="page-content">
+    <h1 class="page-title">手腕伸展</h1>
+    <p class="page-subtitle">预防鼠标手，放松手腕</p>
+    <p class="page-desc">长时间打字和操作鼠标会导致腕管压力增大，这组动作能放松前臂肌肉和腕部韧带。</p>
+
+    <div class="exercise-area">
+      <div class="wrist-hands">
+        <div class="wrist-hand" id="handLeft"></div>
+        <div class="wrist-hand" id="handRight"></div>
+      </div>
+
+      <div class="exercise-guide-text" id="guideText">准备好后，点击开始</div>
+      <div class="exercise-timer" id="timer">10</div>
+
+      <div class="phase-dots" id="phaseDots">
+        <div class="phase-dot"></div><div class="phase-dot"></div>
+        <div class="phase-dot"></div><div class="phase-dot"></div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-start" id="actionBtn">开始</button>
+      </div>
+    </div>
+
+    <div class="instruction-card">
+      <h3>动作顺序</h3>
+      <div class="breath-flow">
+        <div class="flow-step"><div class="step-icon">上</div><div class="step-name">10秒</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon">下</div><div class="step-name">10秒</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon">圈</div><div class="step-name">10秒</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon">抖</div><div class="step-name">10秒</div></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const handLeft = document.getElementById('handLeft');
+    const handRight = document.getElementById('handRight');
+    const guideText = document.getElementById('guideText');
+    const timer = document.getElementById('timer');
+    const actionBtn = document.getElementById('actionBtn');
+    const phaseDots = document.querySelectorAll('#phaseDots .phase-dot');
+
+    const STEPS = [
+      { name: '手掌向上弯曲，指尖指向身体', class: 'flex-up', duration: 10000 },
+      { name: '手掌向下弯曲，指尖指向地面', class: 'flex-down', duration: 10000 },
+      { name: '双手腕同时转圈', class: 'shake', duration: 10000 },
+      { name: '双手自然下垂，轻轻抖动', class: '', duration: 10000 }
+    ];
+
+    let isRunning = false;
+    let isPaused = false;
+    let currentStep = 0;
+    let countdown = 0;
+    let stepTimer = null;
+    let countdownInterval = null;
+    let remainingTime = 0;
+
+    function updateDots() {
+      phaseDots.forEach((dot, i) => {
+        dot.classList.remove('active', 'completed');
+        if (i < currentStep) dot.classList.add('completed');
+        else if (i === currentStep) dot.classList.add('active');
+      });
+    }
+
+    function clearHandClass() {
+      ['flex-up','flex-down','shake'].forEach(c => {
+        handLeft.classList.remove(c);
+        handRight.classList.remove(c);
+      });
+    }
+
+    function setHandClass(cls) {
+      clearHandClass();
+      if (cls) {
+        handLeft.classList.add(cls);
+        handRight.classList.add(cls);
+      }
+    }
+
+    function runStep() {
+      if (!isRunning || isPaused) return;
+      if (currentStep >= STEPS.length) {
+        finish();
+        return;
+      }
+      const step = STEPS[currentStep];
+      setHandClass(step.class);
+      guideText.textContent = step.name;
+      countdown = Math.ceil(step.duration / 1000);
+      timer.textContent = countdown;
+      updateDots();
+
+      const startTime = Date.now();
+      countdownInterval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, Math.ceil((step.duration - elapsed) / 1000));
+        timer.textContent = remaining;
+      }, 200);
+
+      stepTimer = setTimeout(() => {
+        clearInterval(countdownInterval);
+        currentStep++;
+        runStep();
+      }, step.duration);
+    }
+
+    function start() {
+      isRunning = true;
+      isPaused = false;
+      currentStep = 0;
+      actionBtn.textContent = '暂停';
+      actionBtn.classList.remove('btn-start', 'btn-restart');
+      actionBtn.classList.add('btn-pause');
+      runStep();
+    }
+
+    function pause() {
+      isPaused = true;
+      clearInterval(countdownInterval);
+      clearTimeout(stepTimer);
+      const step = STEPS[currentStep];
+      const elapsed = step.duration - (countdown * 1000);
+      remainingTime = step.duration - elapsed;
+      guideText.textContent = '已暂停';
+      actionBtn.textContent = '继续';
+      actionBtn.classList.remove('btn-pause');
+      actionBtn.classList.add('btn-start');
+    }
+
+    function resume() {
+      isPaused = false;
+      actionBtn.textContent = '暂停';
+      actionBtn.classList.remove('btn-start');
+      actionBtn.classList.add('btn-pause');
+      guideText.textContent = STEPS[currentStep].name;
+      setHandClass(STEPS[currentStep].class);
+
+      const startTime = Date.now() - (STEPS[currentStep].duration - remainingTime);
+      countdownInterval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, Math.ceil((STEPS[currentStep].duration - elapsed) / 1000));
+        timer.textContent = remaining;
+      }, 200);
+
+      stepTimer = setTimeout(() => {
+        clearInterval(countdownInterval);
+        currentStep++;
+        runStep();
+      }, remainingTime);
+    }
+
+    function finish() {
+      isRunning = false;
+      clearHandClass();
+      guideText.textContent = '完成！手腕已放松';
+      timer.textContent = '--';
+      phaseDots.forEach(d => d.classList.remove('active', 'completed'));
+      actionBtn.textContent = '再来一次';
+      actionBtn.classList.remove('btn-pause');
+      actionBtn.classList.add('btn-restart');
+    }
+
+    actionBtn.addEventListener('click', () => {
+      const text = actionBtn.textContent;
+      if (text === '开始' || text === '再来一次') start();
+      else if (text === '暂停') pause();
+      else if (text === '继续') resume();
+    });
+  </script>
+</body>
+</html>

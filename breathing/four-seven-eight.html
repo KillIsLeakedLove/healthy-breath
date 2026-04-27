@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4-7-8 呼吸法 - Healthy Breath</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .breath-circle.inhale-478 { animation: inhale 4s ease-in-out forwards; }
+    .breath-circle.hold-478 { animation: hold 7s linear forwards; }
+    .breath-circle.exhale-478 { animation: exhale 8s ease-in-out forwards; }
+    .flow-step .step-icon.wide { width: 36px; }
+  </style>
+</head>
+<body class="page-body">
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="../index.html" class="nav-back">&#8592;</a>
+      <span class="nav-title">4-7-8 呼吸法</span>
+    </div>
+    <a href="../index.html" class="nav-home-link">主页</a>
+  </nav>
+
+  <div class="page-content">
+    <h1 class="page-title">4-7-8 呼吸法</h1>
+    <p class="page-subtitle">缓解焦虑 &#183; 帮助入睡</p>
+    <p class="page-desc">哈佛医学博士 Andrew Weil 推广的方法。通过延长呼气激活副交感神经系统，是天然的镇静剂。</p>
+
+    <div class="breath-stage">
+      <svg class="ring-track" viewBox="0 0 280 280">
+        <circle cx="140" cy="140" r="135"/>
+        <defs>
+          <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#4a7a5a"/>
+            <stop offset="100%" stop-color="#6a9a7a"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <svg class="ring-progress" viewBox="0 0 280 280">
+        <circle cx="140" cy="140" r="135"/>
+      </svg>
+      <div class="breath-circle" id="breathCircle"></div>
+      <div class="breath-label" id="breathLabel">准备</div>
+    </div>
+
+    <div class="timer" id="timer">--</div>
+
+    <div class="phase-dots">
+      <div class="phase-dot"></div>
+      <div class="phase-dot"></div>
+      <div class="phase-dot"></div>
+    </div>
+
+    <div class="controls">
+      <div class="settings-row">
+        <div class="setting-item">
+          <label for="cycleSelect">循环</label>
+          <select id="cycleSelect">
+            <option value="2">2 次</option>
+            <option value="4" selected>4 次</option>
+            <option value="6">6 次</option>
+            <option value="8">8 次</option>
+            <option value="999">无限</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label class="toggle-sound">
+            <input type="checkbox" id="soundToggle" checked>
+            <span>音效</span>
+          </label>
+        </div>
+      </div>
+      <button class="btn btn-start" id="actionBtn">开始</button>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-value" id="elapsedStat">00:00</div>
+        <div class="stat-label">已用时</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="cycleInfo">-</div>
+        <div class="stat-label">进度</div>
+      </div>
+    </div>
+
+    <div class="instruction-card">
+      <h3>4-7-8 呼吸法</h3>
+      <div class="breath-flow">
+        <div class="flow-step"><div class="step-icon wide">吸</div><div class="step-name">4秒</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon wide">屏</div><div class="step-name">7秒</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon wide">呼</div><div class="step-name">8秒</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="celebration" id="celebration"></div>
+
+  <script src="../js/breathing.js"></script>
+  <script>
+    const BREATH_CONFIG = {
+      phases: [
+        { name: '吸气', class: 'inhale-478', duration: 4000 },
+        { name: '屏息', class: 'hold-478', duration: 7000 },
+        { name: '呼气', class: 'exhale-478', duration: 8000 }
+      ]
+    };
+    initBreathing(BREATH_CONFIG);
+  </script>
+</body>
+</html>

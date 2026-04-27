@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>肩部滚动 - Healthy Breath</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="page-body">
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="../index.html" class="nav-back">&#8592;</a>
+      <span class="nav-title">肩部滚动</span>
+    </div>
+    <a href="../index.html" class="nav-home-link">主页</a>
+  </nav>
+
+  <div class="page-content">
+    <h1 class="page-title">肩部滚动</h1>
+    <p class="page-subtitle">释放肩部紧张，改善 posture</p>
+    <p class="page-desc">久坐导致的含胸驼背会让斜方肌持续紧张。肩部的滚动运动能激活菱形肌，打开胸腔。</p>
+
+    <div class="exercise-area">
+      <div class="shoulder-figure">
+        <div class="shoulder-left" id="shoulderLeft"></div>
+        <div class="shoulder-right" id="shoulderRight"></div>
+        <div class="shoulder-torso"></div>
+      </div>
+
+      <div class="exercise-guide-text" id="guideText">准备好后，点击开始</div>
+      <div class="exercise-timer" id="timer">向后 x5</div>
+
+      <div class="phase-dots" id="phaseDots">
+        <div class="phase-dot"></div><div class="phase-dot"></div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-start" id="actionBtn">开始</button>
+      </div>
+    </div>
+
+    <div class="instruction-card">
+      <h3>动作顺序</h3>
+      <div class="breath-flow">
+        <div class="flow-step"><div class="step-icon">后</div><div class="step-name">5次</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon">前</div><div class="step-name">5次</div></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const shoulderLeft = document.getElementById('shoulderLeft');
+    const shoulderRight = document.getElementById('shoulderRight');
+    const guideText = document.getElementById('guideText');
+    const timer = document.getElementById('timer');
+    const actionBtn = document.getElementById('actionBtn');
+    const phaseDots = document.querySelectorAll('#phaseDots .phase-dot');
+
+    let isRunning = false;
+    let isPaused = false;
+    let currentPhase = 0;
+    let currentRep = 0;
+    let repTimer = null;
+    let phaseTimer = null;
+    let remainingTime = 0;
+    let pauseRep = 0;
+
+    const PHASES = [
+      { name: '双肩缓慢向后滚动', reps: 5, interval: 3000, leftClass: 'roll-back', rightClass: 'roll-back' },
+      { name: '双肩缓慢向前滚动', reps: 5, interval: 3000, leftClass: 'roll-forward', rightClass: 'roll-forward' }
+    ];
+
+    function updateDots() {
+      phaseDots.forEach((dot, i) => {
+        dot.classList.remove('active', 'completed');
+        if (i < currentPhase) dot.classList.add('completed');
+        else if (i === currentPhase) dot.classList.add('active');
+      });
+    }
+
+    function clearShoulderClass() {
+      ['roll-back','roll-forward'].forEach(c => {
+        shoulderLeft.classList.remove(c);
+        shoulderRight.classList.remove(c);
+      });
+    }
+
+    function runRep() {
+      if (!isRunning || isPaused) return;
+      const phase = PHASES[currentPhase];
+
+      if (currentRep >= phase.reps) {
+        currentPhase++;
+        currentRep = 0;
+        if (currentPhase >= PHASES.length) {
+          finish();
+          return;
+        }
+        runPhase();
+        return;
+      }
+
+      currentRep++;
+      clearShoulderClass();
+      shoulderLeft.classList.add(phase.leftClass);
+      shoulderRight.classList.add(phase.rightClass);
+      timer.textContent = `${phase.name.includes('后') ? '向后' : '向前'} x${currentRep}/${phase.reps}`;
+
+      setTimeout(() => {
+        clearShoulderClass();
+      }, phase.interval * 0.6);
+
+      repTimer = setTimeout(() => {
+        runRep();
+      }, phase.interval);
+    }
+
+    function runPhase() {
+      if (!isRunning || isPaused) return;
+      const phase = PHASES[currentPhase];
+      guideText.textContent = phase.name;
+      updateDots();
+      runRep();
+    }
+
+    function start() {
+      isRunning = true;
+      isPaused = false;
+      currentPhase = 0;
+      currentRep = 0;
+      actionBtn.textContent = '暂停';
+      actionBtn.classList.remove('btn-start', 'btn-restart');
+      actionBtn.classList.add('btn-pause');
+      runPhase();
+    }
+
+    function pause() {
+      isPaused = true;
+      clearTimeout(repTimer);
+      guideText.textContent = '已暂停';
+      actionBtn.textContent = '继续';
+      actionBtn.classList.remove('btn-pause');
+      actionBtn.classList.add('btn-start');
+      pauseRep = currentRep;
+    }
+
+    function resume() {
+      isPaused = false;
+      actionBtn.textContent = '暂停';
+      actionBtn.classList.remove('btn-start');
+      actionBtn.classList.add('btn-pause');
+      guideText.textContent = PHASES[currentPhase].name;
+      currentRep = pauseRep;
+      runRep();
+    }
+
+    function finish() {
+      isRunning = false;
+      clearShoulderClass();
+      guideText.textContent = '完成！肩部已放松';
+      timer.textContent = '--';
+      phaseDots.forEach(d => d.classList.remove('active', 'completed'));
+      actionBtn.textContent = '再来一次';
+      actionBtn.classList.remove('btn-pause');
+      actionBtn.classList.add('btn-restart');
+    }
+
+    actionBtn.addEventListener('click', () => {
+      const text = actionBtn.textContent;
+      if (text === '开始' || text === '再来一次') start();
+      else if (text === '暂停') pause();
+      else if (text === '继续') resume();
+    });
+  </script>
+</body>
+</html>

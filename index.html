@@ -3,116 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Healthy Breath - 箱式呼吸法</title>
+  <title>Healthy Breath - 放松与呼吸</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <!-- 背景粒子 -->
+<body class="home-body">
   <div class="particles" id="particles"></div>
 
-  <!-- 呼吸波纹 -->
-  <div class="ripple-bg">
-    <div class="ripple-ring"></div>
-    <div class="ripple-ring"></div>
-    <div class="ripple-ring"></div>
-  </div>
-
-  <!-- 庆祝动画 -->
-  <div class="celebration" id="celebration"></div>
-
-  <div class="container">
+  <header class="home-header">
     <h1>Healthy Breath</h1>
-    <p class="subtitle">箱式呼吸法 · 放松身心</p>
+    <p>工作间隙的放松伙伴</p>
+  </header>
 
-    <div class="breath-stage">
-      <svg class="ring-track" viewBox="0 0 280 280">
-        <circle cx="140" cy="140" r="135"/>
-        <defs>
-          <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#4a7a5a"/>
-            <stop offset="100%" stop-color="#6a9a7a"/>
-          </linearGradient>
-        </defs>
-      </svg>
-      <svg class="ring-progress" viewBox="0 0 280 280">
-        <circle cx="140" cy="140" r="135"/>
-      </svg>
-      <div class="breath-circle" id="breathCircle"></div>
-      <div class="breath-label" id="breathLabel">准备</div>
-    </div>
-
-    <div class="timer" id="timer">--</div>
-
-    <div class="phase-dots">
-      <div class="phase-dot"></div>
-      <div class="phase-dot"></div>
-      <div class="phase-dot"></div>
-      <div class="phase-dot"></div>
-    </div>
-
-    <div class="controls">
-      <div class="settings-row">
-        <div class="setting-item">
-          <label for="cycleSelect">循环</label>
-          <select id="cycleSelect">
-            <option value="3">3 次</option>
-            <option value="5" selected>5 次</option>
-            <option value="10">10 次</option>
-            <option value="15">15 次</option>
-            <option value="20">20 次</option>
-            <option value="30">30 次</option>
-            <option value="999">无限</option>
-          </select>
-        </div>
-        <div class="setting-item">
-          <label class="toggle-sound">
-            <input type="checkbox" id="soundToggle" checked>
-            <span>音效</span>
-          </label>
-        </div>
+  <main class="home-content">
+    <!-- 呼吸法 -->
+    <section class="category">
+      <h2 class="category-title">
+        <span class="cat-icon">&#127788;</span>
+        呼吸法
+        <span class="cat-line"></span>
+      </h2>
+      <div class="card-grid four-col">
+        <a href="breathing/box.html" class="card">
+          <div class="card-icon">&#9638;</div>
+          <div class="card-title">箱式呼吸法</div>
+          <div class="card-desc">4-4-4-4 节奏，快速平复心绪</div>
+          <span class="card-tag">1分钟</span>
+        </a>
+        <a href="breathing/four-seven-eight.html" class="card">
+          <div class="card-icon">&#128164;</div>
+          <div class="card-title">4-7-8 呼吸法</div>
+          <div class="card-desc">缓解焦虑，帮助入睡</div>
+          <span class="card-tag">2分钟</span>
+        </a>
+        <a href="breathing/resonant.html" class="card">
+          <div class="card-icon">&#127932;</div>
+          <div class="card-title">共振呼吸</div>
+          <div class="card-desc">5-5 节奏，平衡自主神经</div>
+          <span class="card-tag">2分钟</span>
+        </a>
+        <a href="breathing/equal.html" class="card">
+          <div class="card-icon">&#9863;</div>
+          <div class="card-title">相等呼吸</div>
+          <div class="card-desc">4-4 简单平衡，随时可做</div>
+          <span class="card-tag">1分钟</span>
+        </a>
       </div>
+    </section>
 
-      <button class="btn btn-start" id="actionBtn">开始</button>
-    </div>
-
-    <div class="stats-bar">
-      <div class="stat">
-        <div class="stat-value" id="elapsedStat">00:00</div>
-        <div class="stat-label">已用时</div>
+    <!-- 身体放松 -->
+    <section class="category">
+      <h2 class="category-title">
+        <span class="cat-icon">&#128170;</span>
+        身体放松
+        <span class="cat-line"></span>
+      </h2>
+      <div class="card-grid">
+        <a href="exercises/eye-rest.html" class="card">
+          <div class="card-icon">&#128064;</div>
+          <div class="card-title">20-20-20 护眼</div>
+          <div class="card-desc">定时提醒，缓解用眼疲劳</div>
+          <span class="card-tag">20秒</span>
+        </a>
+        <a href="exercises/neck-stretch.html" class="card">
+          <div class="card-icon">&#129333;</div>
+          <div class="card-title">颈部放松</div>
+          <div class="card-desc">缓解久坐导致的颈部僵硬</div>
+          <span class="card-tag">2分钟</span>
+        </a>
+        <a href="exercises/wrist-stretch.html" class="card">
+          <div class="card-icon">&#9995;</div>
+          <div class="card-title">手腕伸展</div>
+          <div class="card-desc">预防鼠标手，放松手腕</div>
+          <span class="card-tag">1分钟</span>
+        </a>
+        <a href="exercises/shoulder-roll.html" class="card">
+          <div class="card-icon">&#128076;</div>
+          <div class="card-title">肩部滚动</div>
+          <div class="card-desc">释放肩部紧张，改善 posture</div>
+          <span class="card-tag">1分钟</span>
+        </a>
+        <a href="exercises/body-scan.html" class="card">
+          <div class="card-icon">&#129496;</div>
+          <div class="card-title">身体扫描</div>
+          <div class="card-desc">3分钟正念放松，觉察身体</div>
+          <span class="card-tag">3分钟</span>
+        </a>
       </div>
-      <div class="stat">
-        <div class="stat-value" id="cycleInfo">-</div>
-        <div class="stat-label">进度</div>
-      </div>
-    </div>
+    </section>
 
-    <div class="instruction-card">
-      <h3>箱式呼吸法 (4-4-4-4)</h3>
-      <div class="breath-flow">
-        <div class="flow-step">
-          <div class="step-icon">吸</div>
-          <div class="step-name">4秒</div>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">
-          <div class="step-icon">屏</div>
-          <div class="step-name">4秒</div>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">
-          <div class="step-icon">呼</div>
-          <div class="step-name">4秒</div>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">
-          <div class="step-icon">屏</div>
-          <div class="step-name">4秒</div>
-        </div>
+    <!-- 精神放松 -->
+    <section class="category">
+      <h2 class="category-title">
+        <span class="cat-icon">&#127807;</span>
+        精神放松
+        <span class="cat-line"></span>
+      </h2>
+      <div class="card-grid four-col">
+        <a href="articles/mindfulness.html" class="card">
+          <div class="card-icon">&#129513;</div>
+          <div class="card-title">正念入门</div>
+          <div class="card-desc">什么是正念，如何开始练习</div>
+          <span class="card-tag">文章</span>
+        </a>
+        <a href="articles/work-stress.html" class="card">
+          <div class="card-icon">&#128188;</div>
+          <div class="card-title">应对工作压力</div>
+          <div class="card-desc">识别压力信号，科学应对策略</div>
+          <span class="card-tag">文章</span>
+        </a>
+        <a href="articles/anxiety-grounding.html" class="card">
+          <div class="card-icon">&#127758;</div>
+          <div class="card-title">焦虑急救</div>
+          <div class="card-desc">5-4-3-2-1 grounding 技巧</div>
+          <span class="card-tag">文章</span>
+        </a>
+        <a href="articles/sleep-relax.html" class="card">
+          <div class="card-icon">&#127769;</div>
+          <div class="card-title">睡前放松指南</div>
+          <div class="card-desc">改善睡眠质量的习惯与环境</div>
+          <span class="card-tag">文章</span>
+        </a>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <script src="js/script.js"></script>
   <script>
     (function initParticles() {
       const container = document.getElementById('particles');

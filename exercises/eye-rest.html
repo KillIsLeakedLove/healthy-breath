@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20-20-20 护眼法则 - Healthy Breath</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="page-body">
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="../index.html" class="nav-back">&#8592;</a>
+      <span class="nav-title">20-20-20 护眼</span>
+    </div>
+    <a href="../index.html" class="nav-home-link">主页</a>
+  </nav>
+
+  <div class="page-content">
+    <h1 class="page-title">20-20-20 护眼法则</h1>
+    <p class="page-subtitle">每 20 分钟 &#183; 看 20 英尺外 &#183; 20 秒</p>
+    <p class="page-desc">美国眼科学会推荐。长时间盯着屏幕会导致眼睛干涩和视疲劳，定期远眺能有效放松睫状肌。</p>
+
+    <div class="exercise-area">
+      <div class="eye-illustration" id="eyeIllu">
+        <div class="eye-ball" id="eyeBall"></div>
+      </div>
+
+      <div class="exercise-guide-text" id="guideText">准备好后，点击开始休息</div>
+      <div class="exercise-timer" id="timer">20</div>
+
+      <div class="controls">
+        <button class="btn btn-start" id="actionBtn">开始休息</button>
+      </div>
+
+      <div class="stats-bar" style="margin-top:1.5rem">
+        <div class="stat">
+          <div class="stat-value" id="nextBreak">20:00</div>
+          <div class="stat-label">下次提醒</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="todayCount">0</div>
+          <div class="stat-label">今日次数</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="instruction-card">
+      <h3>20-20-20 法则</h3>
+      <div class="breath-flow">
+        <div class="flow-step"><div class="step-icon">20</div><div class="step-name">分钟</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon">20</div><div class="step-name">英尺</div></div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-step"><div class="step-icon">20</div><div class="step-name">秒</div></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const eyeIllu = document.getElementById('eyeIllu');
+    const guideText = document.getElementById('guideText');
+    const timer = document.getElementById('timer');
+    const actionBtn = document.getElementById('actionBtn');
+    const nextBreakEl = document.getElementById('nextBreak');
+    const todayCountEl = document.getElementById('todayCount');
+
+    let isResting = false;
+    let restTimer = null;
+    let workTimer = null;
+    let countdown = 20;
+    let workCountdown = 20 * 60;
+    let todayCount = parseInt(localStorage.getItem('eyeRestCount') || '0');
+    todayCountEl.textContent = todayCount;
+
+    function updateWorkTimer() {
+      if (workCountdown <= 0) {
+        nextBreakEl.textContent = '00:00';
+        return;
+      }
+      workCountdown--;
+      const m = Math.floor(workCountdown / 60).toString().padStart(2, '0');
+      const s = (workCountdown % 60).toString().padStart(2, '0');
+      nextBreakEl.textContent = `${m}:${s}`;
+    }
+
+    workTimer = setInterval(updateWorkTimer, 1000);
+
+    function startRest() {
+      isResting = true;
+      countdown = 20;
+      timer.textContent = countdown;
+      guideText.textContent = '看向 20 英尺（约 6 米）外的物体';
+      actionBtn.textContent = '暂停';
+      actionBtn.classList.remove('btn-start');
+      actionBtn.classList.add('btn-pause');
+      eyeIllu.classList.add('resting');
+
+      restTimer = setInterval(() => {
+        countdown--;
+        timer.textContent = countdown;
+        if (countdown <= 0) {
+          finishRest();
+        }
+      }, 1000);
+    }
+
+    function pauseRest() {
+      isResting = false;
+      clearInterval(restTimer);
+      guideText.textContent = '已暂停';
+      actionBtn.textContent = '继续';
+      actionBtn.classList.remove('btn-pause');
+      actionBtn.classList.add('btn-start');
+      eyeIllu.classList.remove('resting');
+    }
+
+    function resumeRest() {
+      isResting = true;
+      guideText.textContent = '看向 20 英尺（约 6 米）外的物体';
+      actionBtn.textContent = '暂停';
+      actionBtn.classList.remove('btn-start');
+      actionBtn.classList.add('btn-pause');
+      eyeIllu.classList.add('resting');
+
+      restTimer = setInterval(() => {
+        countdown--;
+        timer.textContent = countdown;
+        if (countdown <= 0) {
+          finishRest();
+        }
+      }, 1000);
+    }
+
+    function finishRest() {
+      isResting = false;
+      clearInterval(restTimer);
+      timer.textContent = '完成';
+      guideText.textContent = '休息完成！眼睛已放松';
+      actionBtn.textContent = '再来一次';
+      actionBtn.classList.remove('btn-pause');
+      actionBtn.classList.add('btn-restart');
+      eyeIllu.classList.remove('resting');
+
+      todayCount++;
+      localStorage.setItem('eyeRestCount', todayCount.toString());
+      todayCountEl.textContent = todayCount;
+
+      workCountdown = 20 * 60;
+    }
+
+    actionBtn.addEventListener('click', () => {
+      const text = actionBtn.textContent;
+      if (text === '开始休息' || text === '再来一次') {
+        startRest();
+      } else if (text === '暂停') {
+        pauseRest();
+      } else if (text === '继续') {
+        resumeRest();
+      }
+    });
+  </script>
+</body>
+</html>
