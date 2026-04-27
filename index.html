@@ -6,131 +6,382 @@
   <title>Healthy Breath - 放松与呼吸</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="home-body">
+<body class="spa-body">
   <div class="particles" id="particles"></div>
 
-  <header class="home-header">
+  <header class="spa-header">
     <h1>Healthy Breath</h1>
     <p>工作间隙的放松伙伴</p>
   </header>
 
-  <main class="home-content">
-    <!-- 呼吸法 -->
-    <section class="category">
-      <h2 class="category-title">
-        <span class="cat-icon">&#127788;</span>
-        呼吸法
-        <span class="cat-line"></span>
-      </h2>
-      <div class="card-grid four-col">
-        <a href="breathing/box.html" class="card">
-          <div class="card-icon">&#9638;</div>
-          <div class="card-title">箱式呼吸法</div>
-          <div class="card-desc">4-4-4-4 节奏，快速平复心绪</div>
-          <span class="card-tag">1分钟</span>
-        </a>
-        <a href="breathing/four-seven-eight.html" class="card">
-          <div class="card-icon">&#128164;</div>
-          <div class="card-title">4-7-8 呼吸法</div>
-          <div class="card-desc">缓解焦虑，帮助入睡</div>
-          <span class="card-tag">2分钟</span>
-        </a>
-        <a href="breathing/resonant.html" class="card">
-          <div class="card-icon">&#127932;</div>
-          <div class="card-title">共振呼吸</div>
-          <div class="card-desc">5-5 节奏，平衡自主神经</div>
-          <span class="card-tag">2分钟</span>
-        </a>
-        <a href="breathing/equal.html" class="card">
-          <div class="card-icon">&#9863;</div>
-          <div class="card-title">相等呼吸</div>
-          <div class="card-desc">4-4 简单平衡，随时可做</div>
-          <span class="card-tag">1分钟</span>
-        </a>
-      </div>
-    </section>
+  <main class="main-stage" id="mainStage">
 
-    <!-- 身体放松 -->
-    <section class="category">
-      <h2 class="category-title">
-        <span class="cat-icon">&#128170;</span>
-        身体放松
-        <span class="cat-line"></span>
-      </h2>
-      <div class="card-grid">
-        <a href="exercises/eye-rest.html" class="card">
-          <div class="card-icon">&#128064;</div>
-          <div class="card-title">20-20-20 护眼</div>
-          <div class="card-desc">定时提醒，缓解用眼疲劳</div>
-          <span class="card-tag">20秒</span>
-        </a>
-        <a href="exercises/neck-stretch.html" class="card">
-          <div class="card-icon">&#129333;</div>
-          <div class="card-title">颈部放松</div>
-          <div class="card-desc">缓解久坐导致的颈部僵硬</div>
-          <span class="card-tag">2分钟</span>
-        </a>
-        <a href="exercises/wrist-stretch.html" class="card">
-          <div class="card-icon">&#9995;</div>
-          <div class="card-title">手腕伸展</div>
-          <div class="card-desc">预防鼠标手，放松手腕</div>
-          <span class="card-tag">1分钟</span>
-        </a>
-        <a href="exercises/shoulder-roll.html" class="card">
-          <div class="card-icon">&#128076;</div>
-          <div class="card-title">肩部滚动</div>
-          <div class="card-desc">释放肩部紧张，改善 posture</div>
-          <span class="card-tag">1分钟</span>
-        </a>
-        <a href="exercises/body-scan.html" class="card">
-          <div class="card-icon">&#129496;</div>
-          <div class="card-title">身体扫描</div>
-          <div class="card-desc">3分钟正念放松，觉察身体</div>
-          <span class="card-tag">3分钟</span>
-        </a>
+    <!-- ========== 箱式呼吸法 ========== -->
+    <div class="module active" id="mod-box" data-type="breathing" data-config='{"phases":[{"name":"吸气","class":"inhale","duration":4000},{"name":"屏息","class":"hold","duration":4000},{"name":"呼气","class":"exhale","duration":4000},{"name":"屏息","class":"hold-empty","duration":4000}]}'>
+      <h2 class="mod-title">箱式呼吸法</h2>
+      <p class="mod-subtitle">4-4-4-4 · 快速平复心绪</p>
+      <p class="mod-desc">美国海军海豹部队常用技巧。通过等长的吸气和呼气，迅速降低心率，恢复冷静专注。</p>
+      <div class="breath-stage">
+        <svg class="ring-track" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/><defs><linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4a7a5a"/><stop offset="100%" stop-color="#6a9a7a"/></linearGradient></defs></svg>
+        <svg class="ring-progress" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
+        <div class="breath-circle"></div>
+        <div class="breath-label">准备</div>
       </div>
-    </section>
+      <div class="timer">--</div>
+      <div class="phase-dots"><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div></div>
+      <div class="controls">
+        <div class="settings-row">
+          <div class="setting-item"><label>循环</label><select class="cycle-select"><option value="3">3 次</option><option value="5" selected>5 次</option><option value="10">10 次</option><option value="15">15 次</option><option value="20">20 次</option><option value="30">30 次</option><option value="999">无限</option></select></div>
+          <div class="setting-item"><label class="toggle-sound"><input type="checkbox" class="sound-toggle" checked><span>音效</span></label></div>
+        </div>
+        <button class="btn btn-start action-btn">开始</button>
+      </div>
+      <div class="stats-bar"><div class="stat"><div class="stat-value elapsed">00:00</div><div class="stat-label">已用时</div></div><div class="stat"><div class="stat-value progress-info">-</div><div class="stat-label">进度</div></div></div>
+      <div class="instruction-card"><h3>箱式呼吸法 (4-4-4-4)</h3><div class="breath-flow"><div class="flow-step"><div class="step-icon">吸</div><div class="step-name">4秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">屏</div><div class="step-name">4秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">呼</div><div class="step-name">4秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">屏</div><div class="step-name">4秒</div></div></div></div>
+    </div>
 
-    <!-- 精神放松 -->
-    <section class="category">
-      <h2 class="category-title">
-        <span class="cat-icon">&#127807;</span>
-        精神放松
-        <span class="cat-line"></span>
-      </h2>
-      <div class="card-grid four-col">
-        <a href="articles/mindfulness.html" class="card">
-          <div class="card-icon">&#129513;</div>
-          <div class="card-title">正念入门</div>
-          <div class="card-desc">什么是正念，如何开始练习</div>
-          <span class="card-tag">文章</span>
-        </a>
-        <a href="articles/work-stress.html" class="card">
-          <div class="card-icon">&#128188;</div>
-          <div class="card-title">应对工作压力</div>
-          <div class="card-desc">识别压力信号，科学应对策略</div>
-          <span class="card-tag">文章</span>
-        </a>
-        <a href="articles/anxiety-grounding.html" class="card">
-          <div class="card-icon">&#127758;</div>
-          <div class="card-title">焦虑急救</div>
-          <div class="card-desc">5-4-3-2-1 grounding 技巧</div>
-          <span class="card-tag">文章</span>
-        </a>
-        <a href="articles/sleep-relax.html" class="card">
-          <div class="card-icon">&#127769;</div>
-          <div class="card-title">睡前放松指南</div>
-          <div class="card-desc">改善睡眠质量的习惯与环境</div>
-          <span class="card-tag">文章</span>
-        </a>
+    <!-- ========== 4-7-8 呼吸法 ========== -->
+    <div class="module" id="mod-478" data-type="breathing" data-config='{"phases":[{"name":"吸气","class":"inhale-478","duration":4000},{"name":"屏息","class":"hold-478","duration":7000},{"name":"呼气","class":"exhale-478","duration":8000}]}'>
+      <h2 class="mod-title">4-7-8 呼吸法</h2>
+      <p class="mod-subtitle">缓解焦虑 · 帮助入睡</p>
+      <p class="mod-desc">哈佛医学博士 Andrew Weil 推广的方法。通过延长呼气激活副交感神经系统，是天然的镇静剂。</p>
+      <div class="breath-stage">
+        <svg class="ring-track" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
+        <svg class="ring-progress" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
+        <div class="breath-circle"></div>
+        <div class="breath-label">准备</div>
       </div>
-    </section>
+      <div class="timer">--</div>
+      <div class="phase-dots"><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div></div>
+      <div class="controls">
+        <div class="settings-row">
+          <div class="setting-item"><label>循环</label><select class="cycle-select"><option value="2">2 次</option><option value="4" selected>4 次</option><option value="6">6 次</option><option value="8">8 次</option><option value="999">无限</option></select></div>
+          <div class="setting-item"><label class="toggle-sound"><input type="checkbox" class="sound-toggle" checked><span>音效</span></label></div>
+        </div>
+        <button class="btn btn-start action-btn">开始</button>
+      </div>
+      <div class="stats-bar"><div class="stat"><div class="stat-value elapsed">00:00</div><div class="stat-label">已用时</div></div><div class="stat"><div class="stat-value progress-info">-</div><div class="stat-label">进度</div></div></div>
+      <div class="instruction-card"><h3>4-7-8 呼吸法</h3><div class="breath-flow"><div class="flow-step"><div class="step-icon">吸</div><div class="step-name">4秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">屏</div><div class="step-name">7秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">呼</div><div class="step-name">8秒</div></div></div></div>
+    </div>
+
+    <!-- ========== 共振呼吸 ========== -->
+    <div class="module" id="mod-resonant" data-type="breathing" data-config='{"phases":[{"name":"吸气","class":"inhale-s5","duration":5000},{"name":"屏息","class":"hold-s5","duration":5000},{"name":"呼气","class":"exhale-s5","duration":5000},{"name":"屏息","class":"hold-empty-s5","duration":5000}]}'>
+      <h2 class="mod-title">共振呼吸</h2>
+      <p class="mod-subtitle">5-5-5-5 · 平衡自主神经</p>
+      <p class="mod-desc">又称连贯呼吸。每分钟约 6 次的呼吸频率能与心脏节律共振，降低压力荷尔蒙，提升 HRV。</p>
+      <div class="breath-stage">
+        <svg class="ring-track" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
+        <svg class="ring-progress" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
+        <div class="breath-circle"></div>
+        <div class="breath-label">准备</div>
+      </div>
+      <div class="timer">--</div>
+      <div class="phase-dots"><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div></div>
+      <div class="controls">
+        <div class="settings-row">
+          <div class="setting-item"><label>循环</label><select class="cycle-select"><option value="3">3 次</option><option value="5" selected>5 次</option><option value="10">10 次</option><option value="15">15 次</option><option value="20">20 次</option><option value="999">无限</option></select></div>
+          <div class="setting-item"><label class="toggle-sound"><input type="checkbox" class="sound-toggle" checked><span>音效</span></label></div>
+        </div>
+        <button class="btn btn-start action-btn">开始</button>
+      </div>
+      <div class="stats-bar"><div class="stat"><div class="stat-value elapsed">00:00</div><div class="stat-label">已用时</div></div><div class="stat"><div class="stat-value progress-info">-</div><div class="stat-label">进度</div></div></div>
+      <div class="instruction-card"><h3>共振呼吸 (5-5-5-5)</h3><div class="breath-flow"><div class="flow-step"><div class="step-icon">吸</div><div class="step-name">5秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">屏</div><div class="step-name">5秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">呼</div><div class="step-name">5秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">屏</div><div class="step-name">5秒</div></div></div></div>
+    </div>
+
+    <!-- ========== 相等呼吸 ========== -->
+    <div class="module" id="mod-equal" data-type="breathing" data-config='{"phases":[{"name":"吸气","class":"inhale","duration":4000},{"name":"呼气","class":"exhale","duration":4000}]}'>
+      <h2 class="mod-title">相等呼吸</h2>
+      <p class="mod-subtitle">4-4 · 简单平衡，随时可做</p>
+      <p class="mod-desc">瑜伽中的 Sama Vritti 技巧。吸气和呼气等长，是最简单的呼吸练习，适合初学者和办公室随时进行。</p>
+      <div class="breath-stage">
+        <svg class="ring-track" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
+        <svg class="ring-progress" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
+        <div class="breath-circle"></div>
+        <div class="breath-label">准备</div>
+      </div>
+      <div class="timer">--</div>
+      <div class="phase-dots"><div class="phase-dot"></div><div class="phase-dot"></div></div>
+      <div class="controls">
+        <div class="settings-row">
+          <div class="setting-item"><label>循环</label><select class="cycle-select"><option value="5">5 次</option><option value="10" selected>10 次</option><option value="20">20 次</option><option value="30">30 次</option><option value="50">50 次</option><option value="999">无限</option></select></div>
+          <div class="setting-item"><label class="toggle-sound"><input type="checkbox" class="sound-toggle" checked><span>音效</span></label></div>
+        </div>
+        <button class="btn btn-start action-btn">开始</button>
+      </div>
+      <div class="stats-bar"><div class="stat"><div class="stat-value elapsed">00:00</div><div class="stat-label">已用时</div></div><div class="stat"><div class="stat-value progress-info">-</div><div class="stat-label">进度</div></div></div>
+      <div class="instruction-card"><h3>相等呼吸 (4-4)</h3><div class="breath-flow"><div class="flow-step"><div class="step-icon">吸</div><div class="step-name">4秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">呼</div><div class="step-name">4秒</div></div></div></div>
+    </div>
+
+    <!-- ========== 20-20-20 护眼 ========== -->
+    <div class="module" id="mod-eye" data-type="exercise">
+      <h2 class="mod-title">20-20-20 护眼法则</h2>
+      <p class="mod-subtitle">每 20 分钟 · 看 20 英尺外 · 20 秒</p>
+      <p class="mod-desc">美国眼科学会推荐。长时间盯着屏幕会导致眼睛干涩和视疲劳，定期远眺能有效放松睫状肌。</p>
+      <div class="exercise-visual"><div class="eye-shape" id="eyeShape"><div class="eye-pupil"></div></div></div>
+      <div class="exercise-guide" id="eyeGuide">准备好后，点击开始休息</div>
+      <div class="exercise-timer" id="eyeTimer">20</div>
+      <div class="controls"><button class="btn btn-start" id="eyeBtn">开始休息</button></div>
+      <div class="stats-bar"><div class="stat"><div class="stat-value" id="eyeNext">20:00</div><div class="stat-label">下次提醒</div></div><div class="stat"><div class="stat-value" id="eyeCount">0</div><div class="stat-label">今日次数</div></div></div>
+      <div class="instruction-card"><h3>20-20-20 法则</h3><div class="breath-flow"><div class="flow-step"><div class="step-icon">20</div><div class="step-name">分钟</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">20</div><div class="step-name">英尺</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">20</div><div class="step-name">秒</div></div></div></div>
+    </div>
+
+    <!-- ========== 颈部放松 ========== -->
+    <div class="module" id="mod-neck" data-type="exercise">
+      <h2 class="mod-title">颈部放松</h2>
+      <p class="mod-subtitle">缓解久坐导致的颈部僵硬</p>
+      <p class="mod-desc">长时间低头看屏幕会导致颈椎前伸，这组动作能恢复颈部活动度，缓解肌肉紧张。</p>
+      <div class="exercise-visual"><div class="neck-head" id="neckHead"></div></div>
+      <div class="exercise-guide" id="neckGuide">准备好后，点击开始</div>
+      <div class="exercise-timer" id="neckTimer">5</div>
+      <div class="phase-dots" id="neckDots"><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div></div>
+      <div class="controls"><button class="btn btn-start" id="neckBtn">开始</button></div>
+      <div class="instruction-card"><h3>动作顺序</h3><div class="breath-flow"><div class="flow-step"><div class="step-icon">前</div><div class="step-name">5秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">后</div><div class="step-name">5秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">左</div><div class="step-name">5秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">右</div><div class="step-name">5秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">圈</div><div class="step-name">10秒</div></div></div></div>
+    </div>
+
+    <!-- ========== 手腕伸展 ========== -->
+    <div class="module" id="mod-wrist" data-type="exercise">
+      <h2 class="mod-title">手腕伸展</h2>
+      <p class="mod-subtitle">预防鼠标手，放松手腕</p>
+      <p class="mod-desc">长时间打字和操作鼠标会导致腕管压力增大，这组动作能放松前臂肌肉和腕部韧带。</p>
+      <div class="exercise-visual" style="gap:2rem"><div class="wrist-hand" id="wristL"></div><div class="wrist-hand" id="wristR"></div></div>
+      <div class="exercise-guide" id="wristGuide">准备好后，点击开始</div>
+      <div class="exercise-timer" id="wristTimer">10</div>
+      <div class="phase-dots" id="wristDots"><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div></div>
+      <div class="controls"><button class="btn btn-start" id="wristBtn">开始</button></div>
+      <div class="instruction-card"><h3>动作顺序</h3><div class="breath-flow"><div class="flow-step"><div class="step-icon">上</div><div class="step-name">10秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">下</div><div class="step-name">10秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">圈</div><div class="step-name">10秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">抖</div><div class="step-name">10秒</div></div></div></div>
+    </div>
+
+    <!-- ========== 肩部滚动 ========== -->
+    <div class="module" id="mod-shoulder" data-type="exercise">
+      <h2 class="mod-title">肩部滚动</h2>
+      <p class="mod-subtitle">释放肩部紧张，改善 posture</p>
+      <p class="mod-desc">久坐导致的含胸驼背会让斜方肌持续紧张。肩部的滚动运动能激活菱形肌，打开胸腔。</p>
+      <div class="exercise-visual"><div class="shoulder-figure"><div class="shoulder-left" id="shLeft"></div><div class="shoulder-right" id="shRight"></div><div class="shoulder-torso"></div></div></div>
+      <div class="exercise-guide" id="shGuide">准备好后，点击开始</div>
+      <div class="exercise-timer" id="shTimer">向后 x0/5</div>
+      <div class="phase-dots" id="shDots"><div class="phase-dot"></div><div class="phase-dot"></div></div>
+      <div class="controls"><button class="btn btn-start" id="shBtn">开始</button></div>
+      <div class="instruction-card"><h3>动作顺序</h3><div class="breath-flow"><div class="flow-step"><div class="step-icon">后</div><div class="step-name">5次</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">前</div><div class="step-name">5次</div></div></div></div>
+    </div>
+
+    <!-- ========== 身体扫描 ========== -->
+    <div class="module" id="mod-scan" data-type="exercise">
+      <h2 class="mod-title">身体扫描</h2>
+      <p class="mod-subtitle">3 分钟正念放松 · 觉察身体</p>
+      <p class="mod-desc">源自正念减压疗法（MBSR）。将注意力依次移到身体各部位，觉察感受而不评判。</p>
+      <div class="exercise-visual"><div class="scan-figure"><div class="scan-head"></div><div class="scan-body"><div class="scan-beam" id="scanBeam" style="top:0"></div></div></div></div>
+      <div class="exercise-guide" id="scanGuide">找一个舒适的坐姿，闭上眼睛，点击开始</div>
+      <div class="exercise-timer" id="scanTimer">3:00</div>
+      <div class="controls"><button class="btn btn-start" id="scanBtn">开始</button></div>
+      <div class="instruction-card"><h3>扫描顺序</h3><div class="breath-flow"><div class="flow-step"><div class="step-icon">头</div><div class="step-name">30秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">颈</div><div class="step-name">30秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">肩</div><div class="step-name">30秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">胸</div><div class="step-name">30秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">腹</div><div class="step-name">30秒</div></div><div class="flow-arrow">→</div><div class="flow-step"><div class="step-icon">腿</div><div class="step-name">30秒</div></div></div></div>
+    </div>
+
+    <!-- ========== 正念入门 ========== -->
+    <div class="module" id="mod-mindfulness" data-type="article">
+      <h2 class="mod-title">正念入门</h2>
+      <p class="mod-subtitle">什么是正念，如何开始练习</p>
+      <div class="article-content">
+        <p><strong>正念（Mindfulness）</strong>是一种有意识的、不加评判的觉察当下的能力。它并非要你清空思绪或达到某种特殊状态，而是学会观察自己的念头、情绪和身体感受，如同旁观者一般。</p>
+        <h3>正念的科学依据</h3>
+        <p>自1979年 Jon Kabat-Zinn 创立正念减压疗法（MBSR）以来，大量研究证实了正念的益处。2011年发表在《精神病学研究》的研究发现，8周正念练习可改变大脑灰质密度——海马体增厚（学习与记忆）、杏仁核缩小（压力反应降低）。</p>
+        <h3>常见的误解</h3>
+        <ul>
+          <li><strong>正念不是放松。</strong>它可能让你更敏锐地觉察到不适，但关键在于"不评判"地观察。</li>
+          <li><strong>正念不是清空大脑。</strong>你无法停止思考，正念只是让你注意到"我在想"，然后温和地把注意力带回当下。</li>
+          <li><strong>正念不需要很长时间。</strong>每天5分钟就有效果，关键是持续性。</li>
+        </ul>
+        <h3>如何开始</h3>
+        <ol>
+          <li><strong>选择锚点。</strong>可以是呼吸、身体感觉、行走时的脚步。对初学者，呼吸是最简单的锚点。</li>
+          <li><strong>设定时间。</strong>从每天5分钟开始，固定在同一时段。</li>
+          <li><strong>找个安静的地方。</strong>不需要特殊环境，一把椅子即可。保持脊柱自然挺直。</li>
+          <li><strong>把注意力放在呼吸上。</strong>感受空气从鼻腔进入、腹部起伏。不需要控制呼吸节奏，只是观察。</li>
+          <li><strong>走神时温柔地带回。</strong>这是练习的核心。当你发现自己在想其他事情时，不要自责，只需注意到"走神了"，然后轻轻把注意力拉回呼吸。</li>
+        </ol>
+        <div class="tip-box"><div class="tip-title">🌿 实用小贴士</div><p>如果你发现静坐困难，可以尝试"正念行走"——在走廊或户外缓慢行走，把注意力完全放在脚底接触地面的感觉上。</p></div>
+        <h3>正念与效率</h3>
+        <p>很多人担心正念会"浪费时间"，但研究表明恰恰相反。正念能提高注意力持续时间和工作记忆容量。Google、Intel、SAP 等公司已把正念纳入员工培训。</p>
+        <blockquote>"正念不是逃避生活，而是全然投入生活。"<br>—— Jon Kabat-Zinn</blockquote>
+        <div class="article-source">参考：Kabat-Zinn, J. (1990). Full Catastrophe Living. | Hölzel et al. (2011). Psychiatry Research, 191(1), 36-43.</div>
+      </div>
+    </div>
+
+    <!-- ========== 应对工作压力 ========== -->
+    <div class="module" id="mod-stress" data-type="article">
+      <h2 class="mod-title">应对工作压力</h2>
+      <p class="mod-subtitle">识别压力信号，科学应对策略</p>
+      <div class="article-content">
+        <p>世界卫生组织（WHO）将工作压力定义为"当工作要求超出工作者的应对能力时产生的不良反应"。长期工作压力与心血管疾病、抑郁症和免疫系统抑制密切相关。</p>
+        <h3>识别压力信号</h3>
+        <ul>
+          <li><strong>身体层面：</strong>头痛、肩颈僵硬、胃部不适、心跳加速、睡眠障碍、频繁感冒</li>
+          <li><strong>情绪层面：</strong>易怒、焦虑、注意力涣散、决策困难、对工作失去热情</li>
+          <li><strong>行为层面：</strong>拖延、过度饮食或食欲减退、社交退缩、依赖咖啡因</li>
+        </ul>
+        <h3>生理机制</h3>
+        <p>当你面对 deadline 时，大脑的杏仁核会触发"战斗或逃跑"反应。肾上腺释放皮质醇和肾上腺素，心率和血压上升——这一切都是为了应对短期威胁。但现代工作的压力是持续性的，这种生理反应被长期激活，最终导致肾上腺疲劳。</p>
+        <div class="tip-box"><div class="tip-title">💡 90分钟法则</div><p>人体在清醒时遵循约90分钟的 ultradian rhythm（次昼夜节律）。每工作90分钟后，你的注意力和创造力会自然下降。最佳策略是：工作90分钟，休息15-20分钟。休息时远离屏幕，走动、拉伸或做几次深呼吸。</p></div>
+        <h3>实用的应对策略</h3>
+        <h4>1. 边界管理</h4>
+        <p>研究表明，"工作入侵"（下班时间查看工作消息）是倦怠的最强预测因子之一。设定明确的工作边界：固定上下班时间、关闭非工作时段的通知。</p>
+        <h4>2. 任务拆解</h4>
+        <p>大型任务会激活大脑的威胁反应。使用"两分钟法则"：如果一件事能在2分钟内完成，立刻做；否则拆解成可执行的子任务，每个不超过25分钟。</p>
+        <h4>3. 社交支持</h4>
+        <p>哈佛大学成人发展研究（长达85年的追踪）发现，良好的人际关系是幸福和健康的最强预测因子。在工作中找到至少一位可以倾诉的同事。</p>
+        <h4>4. 运动干预</h4>
+        <p>运动是已知最有效的压力缓冲器。不需要去健身房——每天20分钟快走就能显著降低皮质醇。把运动嵌入日常：走楼梯而非电梯、午休散步。</p>
+        <h4>5. 认知重构</h4>
+        <p>心理学家 Albert Ellis 的 ABC 理论指出：不是事件本身（A）导致情绪后果（C），而是我们对事件的信念（B）。当你想"这个项目搞砸了我就完了"时，尝试替换为"即使不完美，我也能从中学到东西"。</p>
+        <h3>何时寻求专业帮助</h3>
+        <ul>
+          <li>持续两周以上的情绪低落或焦虑</li>
+          <li>睡眠问题严重影响白天功能</li>
+          <li>出现自伤念头或行为</li>
+          <li>身体症状持续且医学检查无异常</li>
+        </ul>
+        <blockquote>"压力不是来自事件本身，而是来自你对事件的看法。"<br>—— Epictetus</blockquote>
+        <div class="article-source">参考：WHO (2020). Guidelines on Mental Health at Work. | Vaillant, G. E. (2012). Triumphs of Experience. Harvard University Press.</div>
+      </div>
+    </div>
+
+    <!-- ========== 焦虑急救 ========== -->
+    <div class="module" id="mod-anxiety" data-type="article">
+      <h2 class="mod-title">焦虑急救</h2>
+      <p class="mod-subtitle">5-4-3-2-1 Grounding 技巧 · 快速回到当下</p>
+      <div class="article-content">
+        <p>焦虑的本质是大脑对"想象中的威胁"过度反应。当你感到心跳加速、呼吸急促、思维飞速旋转时，往往不是当下真的有危险，而是你的神经系统被"劫持"了。这时最有效的应对不是"别想太多"，而是把大脑从未来拉回<strong>此时此刻</strong>。</p>
+        <h3>5-4-3-2-1 Grounding 技巧</h3>
+        <p>这是临床心理学中广泛使用的 grounding 技术，由 trauma 治疗专家发展而来。它通过激活五种感官，强行将注意力从内心焦虑转移到外部环境。</p>
+        <div class="tip-box"><div class="tip-title">👁 5 · 看：找出 5 样能看到的东西</div><p>环顾四周，说出你能看到的五样东西。尽可能具体——不是"桌子"，而是"木桌上的一道划痕"、"窗外那棵树上的一片红叶"。描述它们的颜色、形状、纹理。</p></div>
+        <div class="tip-box"><div class="tip-title">🖐 4 · 触：感受 4 样能触摸的东西</div><p>用手触摸四种不同的物体——椅子的面料、衣服的质地、手机屏幕的冰凉、手腕上脉搏的跳动。注意每种触感的温度、硬度和纹理差异。</p></div>
+        <div class="tip-box"><div class="tip-title">👂 3 · 听：聆听 3 种声音</div><p>闭上眼睛（如果安全的话），仔细聆听环境中的三种声音。可能是空调的低鸣、键盘的敲击、远处的车流。尝试分辨每种声音的来源和节奏。</p></div>
+        <div class="tip-box"><div class="tip-title">👃 2 · 嗅：闻 2 种气味</div><p>寻找两种你能闻到的气味。如果没有明显的气味，可以随身携带一小瓶精油或薄荷膏。嗅觉是唯一直接连接大脑边缘系统的感官，对情绪调节尤为有效。</p></div>
+        <div class="tip-box"><div class="tip-title">👅 1 · 味：品尝 1 种味道</div><p>含一颗薄荷糖、喝一口水、或咬一小口零食。把注意力完全集中在味觉体验上——甜度、温度、口感。这是 grounding 的最后一步，把你完全锚定在此时此刻。</p></div>
+        <h3>为什么 Grounding 有效</h3>
+        <p>焦虑时，大脑的杏仁核（情绪中心）过度活跃，而前额叶皮层（理性决策中心）被抑制。Grounding 通过感官输入"劫持"注意力通道，绕过焦虑的思维循环，让前额叶重新上线。</p>
+        <h3>其他快速镇静技巧</h3>
+        <h4>冷水刺激</h4>
+        <p>将脸浸入冷水（或用手捧冷水洗脸）10-20秒，或握住冰块。低温激活 mammalian dive reflex（哺乳动物潜水反射），自动降低心率和血压。</p>
+        <h4>命名游戏</h4>
+        <p>给自己看到的所有红色物体命名，然后是所有蓝色物体，依此类推。这个简单任务占用了工作记忆，中断了焦虑的思维反刍。</p>
+        <h4>身体定位</h4>
+        <p>双脚平放地面，感受脚底与地面的接触。双手放在大腿上，感受重力。对自己说："此时此刻，我是安全的。"这种身体锚定能快速降低交感神经兴奋度。</p>
+        <h4>4-7-8 呼吸</h4>
+        <p>吸气4秒、屏息7秒、呼气8秒，重复4次。延长呼气直接激活副交感神经系统（负责"休息与消化"），是天然的镇静剂。</p>
+        <blockquote>"焦虑是因为活在未来，抑郁是因为活在过去。平静是因为活在当下。"<br>—— Lao Tzu</blockquote>
+        <h3>何时需要更多帮助</h3>
+        <p>如果焦虑发作频繁（每周超过2次）、持续时间超过30分钟、或严重影响工作和生活，建议寻求专业帮助。认知行为疗法（CBT）对焦虑障碍的有效率超过60%。</p>
+        <div class="article-source">参考：Stapleton, J. A. (2020). Journal of Counseling & Development, 98(2), 215-223. | Linehan, M. M. (2014). DBT Skills Training Manual. Guilford Press.</div>
+      </div>
+    </div>
+
+    <!-- ========== 睡前放松指南 ========== -->
+    <div class="module" id="mod-sleep" data-type="article">
+      <h2 class="mod-title">睡前放松指南</h2>
+      <p class="mod-subtitle">改善睡眠质量的习惯与环境</p>
+      <div class="article-content">
+        <p>睡眠不是"关机和开机"那么简单。它是复杂的生理过程，涉及褪黑素分泌、体温调节、脑电波切换等多个系统。现代人睡眠问题的根源往往不是"睡不着"，而是<strong>生活方式与睡眠生理不兼容</strong>。</p>
+        <h3>睡眠的生理机制</h3>
+        <p>人体有一个内在的生物钟——昼夜节律（circadian rhythm），由下丘脑的视交叉上核（SCN）控制。它根据光线信号调节褪黑素分泌：光线暗时褪黑素上升，促进入睡；光线亮时褪黑素被抑制，保持清醒。问题在于，现代人整天暴露在人造光源（尤其是蓝光）下，生物钟被打乱了。</p>
+        <h3>优化睡眠环境</h3>
+        <h4>光线</h4>
+        <ul>
+          <li>睡前一小时调暗室内灯光，避免直视强光</li>
+          <li>使用蓝光过滤软件（如 f.lux、Night Shift）或佩戴琥珀色眼镜</li>
+          <li>确保卧室足够暗，可使用遮光窗帘或眼罩</li>
+          <li>早晨醒来后尽快接触自然光，重置生物钟</li>
+        </ul>
+        <h4>温度</h4>
+        <p>核心体温下降是入睡的关键信号。最适宜的睡眠温度约为18-20°C。可以尝试：睡前一小时洗个热水澡（出浴后体温快速下降促进入睡）、使用透气的床上用品、保持卧室通风。</p>
+        <h4>声音</h4>
+        <p>完全的安静并非最佳选择——轻微的白噪音（如雨声、风扇声）能掩盖突发噪音，提供更稳定的睡眠环境。研究显示，粉红噪音（pink noise）能增强深度睡眠质量。</p>
+        <div class="tip-box"><div class="tip-title">🌿 咖啡因半衰期</div><p>咖啡因的平均半衰期约为5小时，意味着下午3点喝的一杯咖啡到晚上8点仍有一半残留在体内。对咖啡因敏感的人，建议中午12点后避免摄入。注意：茶、巧克力和某些止痛药也含咖啡因。</p></div>
+        <h3>睡前放松程序（30-60分钟）</h3>
+        <ol>
+          <li><strong>关闭工作设备。</strong>设定一个"数字宵禁"时间，之后不再查看工作邮件或消息。</li>
+          <li><strong>轻度拉伸。</strong>做5-10分钟轻柔的伸展运动，重点放松颈部、肩部和下背部。避免剧烈运动。</li>
+          <li><strong>写日记或清单。</strong>如果大脑停不下来，把明天的待办事项写下来。这叫"大脑卸载"（brain dump），能显著减少入睡前的思维反刍。</li>
+          <li><strong>呼吸练习。</strong>尝试 4-7-8 呼吸法或箱式呼吸法，5-10个循环。</li>
+          <li><strong>渐进式肌肉放松（PMR）。</strong>从脚趾开始，依次紧绷-放松各组肌肉。</li>
+        </ol>
+        <h3>睡眠卫生清单</h3>
+        <ul>
+          <li>固定作息时间，包括周末（波动不超过1小时）</li>
+          <li>只在困倦时上床，避免"硬躺"</li>
+          <li>如果20分钟内没睡着，起床做放松活动，有困意再回床</li>
+          <li>避免在床上工作、吃饭或看电视——床只与睡眠关联</li>
+          <li>午后避免长时间午睡，如需午睡控制在20-30分钟</li>
+          <li>晚餐不要太饱，也不要空腹上床</li>
+          <li>酒精虽能让人快速入睡，但会破坏深度睡眠和REM睡眠</li>
+        </ul>
+        <h3>失眠的认知行为疗法（CBT-I）</h3>
+        <p>CBT-I 被公认为慢性失眠的一线治疗方案，效果优于安眠药。核心包括：</p>
+        <ul>
+          <li><strong>刺激控制：</strong>重建床与睡眠的关联，消除床与清醒的关联</li>
+          <li><strong>睡眠限制：</strong>暂时减少卧床时间以提高睡眠效率，再逐步增加</li>
+          <li><strong>认知重构：</strong>挑战"我必须睡够8小时"等不合理信念</li>
+        </ul>
+        <blockquote>"睡眠是生命的基本需求，不是奢侈品。"<br>—— Matthew Walker, 《Why We Sleep》作者</blockquote>
+        <div class="article-source">参考：Walker, M. P. (2017). Why We Sleep. Scribner. | Morin, C. M. (2006). Insomnia: Psychological Assessment and Management. Guilford Press.</div>
+      </div>
+    </div>
+
   </main>
 
+  <!-- 底部切换栏 -->
+  <div class="bottom-bar">
+    <button class="module-toggle" id="toggleBtn">
+      <span class="toggle-arrow">▲</span>
+      <span class="toggle-label">切换功能</span>
+    </button>
+  </div>
+
+  <!-- 底部面板 -->
+  <div class="bottom-panel" id="bottomPanel">
+    <div class="panel-header">
+      <h3>选择功能</h3>
+      <button class="panel-close" id="panelClose">✕</button>
+    </div>
+    <div class="panel-content">
+      <div class="panel-group">
+        <h4>🌬 呼吸法</h4>
+        <div class="panel-grid">
+          <button class="panel-item active" data-module="box"><span class="pi-icon">◻</span><span class="pi-title">箱式呼吸</span><span class="pi-desc">4-4-4-4</span></button>
+          <button class="panel-item" data-module="478"><span class="pi-icon">🌙</span><span class="pi-title">4-7-8 呼吸</span><span class="pi-desc">助眠</span></button>
+          <button class="panel-item" data-module="resonant"><span class="pi-icon">🎵</span><span class="pi-title">共振呼吸</span><span class="pi-desc">5-5-5-5</span></button>
+          <button class="panel-item" data-module="equal"><span class="pi-icon">⚖</span><span class="pi-title">相等呼吸</span><span class="pi-desc">4-4</span></button>
+        </div>
+      </div>
+      <div class="panel-group">
+        <h4>💪 身体放松</h4>
+        <div class="panel-grid">
+          <button class="panel-item" data-module="eye"><span class="pi-icon">👁</span><span class="pi-title">20-20-20 护眼</span><span class="pi-desc">20秒</span></button>
+          <button class="panel-item" data-module="neck"><span class="pi-icon">🧘</span><span class="pi-title">颈部放松</span><span class="pi-desc">2分钟</span></button>
+          <button class="panel-item" data-module="wrist"><span class="pi-icon">✋</span><span class="pi-title">手腕伸展</span><span class="pi-desc">1分钟</span></button>
+          <button class="panel-item" data-module="shoulder"><span class="pi-icon">💪</span><span class="pi-title">肩部滚动</span><span class="pi-desc">1分钟</span></button>
+          <button class="panel-item" data-module="scan"><span class="pi-icon">🧠</span><span class="pi-title">身体扫描</span><span class="pi-desc">3分钟</span></button>
+        </div>
+      </div>
+      <div class="panel-group">
+        <h4>🌿 精神放松</h4>
+        <div class="panel-grid">
+          <button class="panel-item" data-module="mindfulness"><span class="pi-icon">🧘‍♀</span><span class="pi-title">正念入门</span><span class="pi-desc">文章</span></button>
+          <button class="panel-item" data-module="stress"><span class="pi-icon">💼</span><span class="pi-title">应对压力</span><span class="pi-desc">文章</span></button>
+          <button class="panel-item" data-module="anxiety"><span class="pi-icon">🌍</span><span class="pi-title">焦虑急救</span><span class="pi-desc">文章</span></button>
+          <button class="panel-item" data-module="sleep"><span class="pi-icon">🌙</span><span class="pi-title">睡前指南</span><span class="pi-desc">文章</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-overlay" id="panelOverlay"></div>
+  <div class="celebration" id="celebration"></div>
+
   <script>
+    // ========== 粒子背景 ==========
     (function initParticles() {
       const container = document.getElementById('particles');
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 18; i++) {
         const p = document.createElement('div');
         p.className = 'particle';
         const size = 2 + Math.random() * 4;
@@ -142,6 +393,549 @@
         container.appendChild(p);
       }
     })();
+
+    // ========== SPA 面板切换 ==========
+    const toggleBtn = document.getElementById('toggleBtn');
+    const bottomPanel = document.getElementById('bottomPanel');
+    const panelOverlay = document.getElementById('panelOverlay');
+    const panelClose = document.getElementById('panelClose');
+    const panelItems = document.querySelectorAll('.panel-item');
+    const modules = document.querySelectorAll('.module');
+    let currentModuleId = 'box';
+    let activeApp = null;
+
+    function openPanel() {
+      bottomPanel.classList.add('open');
+      panelOverlay.classList.add('open');
+      toggleBtn.classList.add('open');
+    }
+
+    function closePanel() {
+      bottomPanel.classList.remove('open');
+      panelOverlay.classList.remove('open');
+      toggleBtn.classList.remove('open');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      if (bottomPanel.classList.contains('open')) closePanel();
+      else openPanel();
+    });
+
+    panelClose.addEventListener('click', closePanel);
+    panelOverlay.addEventListener('click', closePanel);
+
+    function cleanupCurrentModule() {
+      if (activeApp && activeApp.cleanup) {
+        activeApp.cleanup();
+        activeApp = null;
+      }
+    }
+
+    function switchModule(moduleId) {
+      if (moduleId === currentModuleId) {
+        closePanel();
+        return;
+      }
+
+      // Cleanup current
+      cleanupCurrentModule();
+
+      // Update panel items
+      panelItems.forEach(item => {
+        item.classList.toggle('active', item.dataset.module === moduleId);
+      });
+
+      // Find target module
+      const targetMod = document.getElementById('mod-' + moduleId);
+      if (!targetMod) return;
+
+      // Animate out current
+      const currentMod = document.querySelector('.module.active');
+      if (currentMod) {
+        currentMod.classList.remove('active');
+      }
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Animate in new after short delay
+      setTimeout(() => {
+        targetMod.classList.add('active');
+        currentModuleId = moduleId;
+
+        // Initialize module logic
+        const type = targetMod.dataset.type;
+        if (type === 'breathing') {
+          activeApp = new BreathingApp(targetMod);
+        } else if (type === 'exercise') {
+          initExercise(targetMod, moduleId);
+        }
+        // articles need no init
+      }, 350);
+
+      closePanel();
+    }
+
+    panelItems.forEach(item => {
+      item.addEventListener('click', () => switchModule(item.dataset.module));
+    });
+
+    // ========== 通用呼吸类 ==========
+    class BreathingApp {
+      constructor(container) {
+        this.container = container;
+        this.config = JSON.parse(container.dataset.config || '{}');
+        this.phases = this.config.phases || [];
+        this.circumference = 785;
+
+        this.circle = container.querySelector('.breath-circle');
+        this.label = container.querySelector('.breath-label');
+        this.timer = container.querySelector('.timer');
+        this.btn = container.querySelector('.action-btn');
+        this.cycleSelect = container.querySelector('.cycle-select');
+        this.ringCircle = container.querySelector('.ring-progress circle');
+        this.progressInfo = container.querySelector('.progress-info');
+        this.elapsedEl = container.querySelector('.elapsed');
+        this.soundToggle = container.querySelector('.sound-toggle');
+        this.dots = container.querySelectorAll('.phase-dot');
+
+        this.isRunning = false;
+        this.isPaused = false;
+        this.currentCycle = 0;
+        this.totalCycles = 5;
+        this.currentPhase = 0;
+        this.countdownInterval = null;
+        this.phaseTimeout = null;
+        this.phaseStartTime = 0;
+        this.remainingPhaseTime = 0;
+        this.sessionStartTime = 0;
+        this.elapsedInterval = null;
+        this.audioCtx = null;
+
+        this.btn.addEventListener('click', () => this.onBtnClick());
+        if (this.soundToggle) {
+          this.soundToggle.addEventListener('change', () => {
+            if (this.soundToggle.checked) this.ensureAudio();
+          });
+        }
+      }
+
+      ensureAudio() {
+        if (!this.audioCtx && this.soundToggle && this.soundToggle.checked) {
+          this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      }
+
+      playTone(freq, dur, type, vol) {
+        if (!this.audioCtx || !this.soundToggle || !this.soundToggle.checked) return;
+        if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
+        const osc = this.audioCtx.createOscillator();
+        const gain = this.audioCtx.createGain();
+        osc.type = type || 'sine';
+        osc.frequency.setValueAtTime(freq, this.audioCtx.currentTime);
+        gain.gain.setValueAtTime(0, this.audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(vol || 0.05, this.audioCtx.currentTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + (dur || 0.3));
+        osc.connect(gain);
+        gain.connect(this.audioCtx.destination);
+        osc.start(this.audioCtx.currentTime);
+        osc.stop(this.audioCtx.currentTime + (dur || 0.3));
+      }
+
+      playPhaseSound(idx) {
+        const tones = [329.63, 392.00, 261.63, 196.00];
+        this.playTone(tones[idx] || 261.63, 0.3, 'sine', 0.04);
+      }
+
+      playStartSound() {
+        this.playTone(261.63, 0.15, 'sine', 0.03);
+        setTimeout(() => this.playTone(329.63, 0.15, 'sine', 0.03), 100);
+        setTimeout(() => this.playTone(392.00, 0.2, 'sine', 0.03), 200);
+      }
+
+      playFinishSound() {
+        this.playTone(392.00, 0.15, 'sine', 0.03);
+        setTimeout(() => this.playTone(493.88, 0.15, 'sine', 0.03), 100);
+        setTimeout(() => this.playTone(587.33, 0.3, 'sine', 0.03), 200);
+      }
+
+      updateRing(dur, start) {
+        if (!this.ringCircle) return;
+        const elapsed = Date.now() - start;
+        const progress = Math.min(elapsed / dur, 1);
+        this.ringCircle.style.strokeDashoffset = this.circumference - (progress * this.circumference);
+      }
+
+      updateCountdown(dur, start) {
+        const elapsed = Date.now() - start;
+        const remaining = Math.max(0, Math.ceil((dur - elapsed) / 1000));
+        this.timer.textContent = remaining;
+      }
+
+      updateDots() {
+        this.dots.forEach((dot, i) => {
+          dot.classList.remove('active', 'completed');
+          if (i < this.currentPhase) dot.classList.add('completed');
+          else if (i === this.currentPhase) dot.classList.add('active');
+        });
+      }
+
+      clearAnims() {
+        if (!this.circle) return;
+        const classes = ['inhale','hold','exhale','hold-empty','inhale-s5','hold-s5','exhale-s5','hold-empty-s5','inhale-478','hold-478','exhale-478'];
+        classes.forEach(c => this.circle.classList.remove(c));
+      }
+
+      updateElapsed() {
+        if (!this.elapsedEl || !this.isRunning) return;
+        const elapsed = Math.floor((Date.now() - this.sessionStartTime) / 1000);
+        const m = Math.floor(elapsed / 60).toString().padStart(2, '0');
+        const s = (elapsed % 60).toString().padStart(2, '0');
+        this.elapsedEl.textContent = `${m}:${s}`;
+      }
+
+      runPhase() {
+        if (!this.isRunning || this.isPaused) return;
+        if (this.currentPhase >= this.phases.length) {
+          this.currentCycle++;
+          if (this.totalCycles !== 999 && this.currentCycle >= this.totalCycles) {
+            this.finish();
+            return;
+          }
+          this.currentPhase = 0;
+        }
+        const phase = this.phases[this.currentPhase];
+        this.clearAnims();
+        void this.circle.offsetWidth;
+        this.circle.classList.add(phase.class);
+        this.label.textContent = phase.name;
+        this.updateDots();
+        this.playPhaseSound(this.currentPhase);
+        this.phaseStartTime = Date.now();
+        this.timer.textContent = Math.ceil(phase.duration / 1000).toString();
+        this.countdownInterval = setInterval(() => {
+          this.updateCountdown(phase.duration, this.phaseStartTime);
+          this.updateRing(phase.duration, this.phaseStartTime);
+        }, 100);
+        this.phaseTimeout = setTimeout(() => {
+          clearInterval(this.countdownInterval);
+          this.currentPhase++;
+          this.runPhase();
+        }, phase.duration);
+      }
+
+      start() {
+        this.isRunning = true;
+        this.isPaused = false;
+        this.currentCycle = 0;
+        this.currentPhase = 0;
+        this.totalCycles = parseInt(this.cycleSelect.value);
+        this.sessionStartTime = Date.now();
+        this.cycleSelect.disabled = true;
+        this.btn.textContent = '暂停';
+        this.btn.classList.remove('btn-start', 'btn-restart');
+        this.btn.classList.add('btn-pause');
+        this.ensureAudio();
+        this.playStartSound();
+        this.updateDots();
+        this.elapsedInterval = setInterval(() => this.updateElapsed(), 1000);
+        this.runPhase();
+      }
+
+      pause() {
+        this.isPaused = true;
+        clearInterval(this.countdownInterval);
+        clearTimeout(this.phaseTimeout);
+        this.remainingPhaseTime = this.phases[this.currentPhase].duration - (Date.now() - this.phaseStartTime);
+        this.btn.textContent = '继续';
+        this.label.textContent = '已暂停';
+      }
+
+      resume() {
+        this.isPaused = false;
+        this.btn.textContent = '暂停';
+        this.label.textContent = this.phases[this.currentPhase].name;
+        this.phaseStartTime = Date.now() - (this.phases[this.currentPhase].duration - this.remainingPhaseTime);
+        this.countdownInterval = setInterval(() => {
+          this.updateCountdown(this.phases[this.currentPhase].duration, this.phaseStartTime);
+          this.updateRing(this.phases[this.currentPhase].duration, this.phaseStartTime);
+        }, 100);
+        this.phaseTimeout = setTimeout(() => {
+          clearInterval(this.countdownInterval);
+          this.currentPhase++;
+          this.runPhase();
+        }, this.remainingPhaseTime);
+      }
+
+      finish() {
+        this.isRunning = false;
+        this.isPaused = false;
+        clearInterval(this.countdownInterval);
+        clearTimeout(this.phaseTimeout);
+        clearInterval(this.elapsedInterval);
+        this.clearAnims();
+        if (this.ringCircle) this.ringCircle.style.strokeDashoffset = this.circumference;
+        this.dots.forEach(d => d.classList.remove('active', 'completed'));
+        this.label.textContent = '完成';
+        this.timer.textContent = '--';
+        const completed = this.totalCycles === 999 ? this.currentCycle : this.totalCycles;
+        this.progressInfo.textContent = `已完成 ${completed} 次`;
+        this.btn.textContent = '再来一次';
+        this.btn.classList.remove('btn-pause');
+        this.btn.classList.add('btn-restart');
+        this.cycleSelect.disabled = false;
+        this.playFinishSound();
+        spawnCelebration();
+      }
+
+      reset() {
+        this.isRunning = false;
+        this.isPaused = false;
+        clearInterval(this.countdownInterval);
+        clearTimeout(this.phaseTimeout);
+        clearInterval(this.elapsedInterval);
+        this.clearAnims();
+        if (this.ringCircle) this.ringCircle.style.strokeDashoffset = this.circumference;
+        this.dots.forEach(d => d.classList.remove('active', 'completed'));
+        this.label.textContent = '准备';
+        this.timer.textContent = '--';
+        this.progressInfo.textContent = '-';
+        if (this.elapsedEl) this.elapsedEl.textContent = '00:00';
+        this.btn.textContent = '开始';
+        this.btn.classList.remove('btn-pause', 'btn-restart');
+        this.btn.classList.add('btn-start');
+        this.cycleSelect.disabled = false;
+      }
+
+      onBtnClick() {
+        if (!this.isRunning) this.start();
+        else if (this.isPaused) this.resume();
+        else this.pause();
+      }
+
+      cleanup() {
+        this.reset();
+      }
+    }
+
+    function spawnCelebration() {
+      const el = document.getElementById('celebration');
+      el.innerHTML = '';
+      el.classList.add('active');
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      for (let i = 0; i < 25; i++) {
+        const p = document.createElement('div');
+        p.className = 'celebration-particle';
+        const angle = (Math.PI * 2 * i) / 25 + (Math.random() - 0.5) * 0.3;
+        const dist = 80 + Math.random() * 180;
+        p.style.left = cx + 'px';
+        p.style.top = cy + 'px';
+        p.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+        p.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+        p.style.animationDelay = (Math.random() * 0.3) + 's';
+        el.appendChild(p);
+      }
+      setTimeout(() => { el.classList.remove('active'); el.innerHTML = ''; }, 1800);
+    }
+
+    // ========== 放松技巧 ==========
+    const exerciseApps = {};
+
+    function initExercise(container, moduleId) {
+      if (moduleId === 'eye') initEyeRest(container);
+      else if (moduleId === 'neck') initNeckStretch(container);
+      else if (moduleId === 'wrist') initWristStretch(container);
+      else if (moduleId === 'shoulder') initShoulderRoll(container);
+      else if (moduleId === 'scan') initBodyScan(container);
+    }
+
+    function initEyeRest(container) {
+      const eyeShape = container.querySelector('#eyeShape');
+      const guide = container.querySelector('#eyeGuide');
+      const timer = container.querySelector('#eyeTimer');
+      const btn = container.querySelector('#eyeBtn');
+      const nextEl = container.querySelector('#eyeNext');
+      const countEl = container.querySelector('#eyeCount');
+
+      let isResting = false, restTimer = null, countdown = 20;
+      let workCountdown = 20 * 60;
+      let todayCount = parseInt(localStorage.getItem('eyeRestCount') || '0');
+      countEl.textContent = todayCount;
+
+      const workTimer = setInterval(() => {
+        if (workCountdown <= 0) { nextEl.textContent = '00:00'; return; }
+        workCountdown--;
+        const m = Math.floor(workCountdown / 60).toString().padStart(2, '0');
+        const s = (workCountdown % 60).toString().padStart(2, '0');
+        nextEl.textContent = `${m}:${s}`;
+      }, 1000);
+
+      function startRest() {
+        isResting = true; countdown = 20; timer.textContent = countdown;
+        guide.textContent = '看向 20 英尺（约 6 米）外的物体';
+        btn.textContent = '暂停'; btn.classList.remove('btn-start'); btn.classList.add('btn-pause');
+        eyeShape.classList.add('resting');
+        restTimer = setInterval(() => {
+          countdown--; timer.textContent = countdown;
+          if (countdown <= 0) finishRest();
+        }, 1000);
+      }
+      function pauseRest() {
+        isResting = false; clearInterval(restTimer);
+        guide.textContent = '已暂停'; btn.textContent = '继续';
+        btn.classList.remove('btn-pause'); btn.classList.add('btn-start');
+        eyeShape.classList.remove('resting');
+      }
+      function resumeRest() {
+        isResting = true; guide.textContent = '看向 20 英尺（约 6 米）外的物体';
+        btn.textContent = '暂停'; btn.classList.remove('btn-start'); btn.classList.add('btn-pause');
+        eyeShape.classList.add('resting');
+        restTimer = setInterval(() => { countdown--; timer.textContent = countdown; if (countdown <= 0) finishRest(); }, 1000);
+      }
+      function finishRest() {
+        isResting = false; clearInterval(restTimer);
+        timer.textContent = '完成'; guide.textContent = '休息完成！眼睛已放松';
+        btn.textContent = '再来一次'; btn.classList.remove('btn-pause'); btn.classList.add('btn-restart');
+        eyeShape.classList.remove('resting');
+        todayCount++; localStorage.setItem('eyeRestCount', todayCount.toString()); countEl.textContent = todayCount;
+        workCountdown = 20 * 60;
+      }
+
+      btn.onclick = () => {
+        const t = btn.textContent;
+        if (t === '开始休息' || t === '再来一次') startRest();
+        else if (t === '暂停') pauseRest();
+        else if (t === '继续') resumeRest();
+      };
+
+      exerciseApps.eye = { cleanup: () => { clearInterval(restTimer); clearInterval(workTimer); } };
+    }
+
+    function initNeckStretch(container) {
+      const head = container.querySelector('#neckHead');
+      const guide = container.querySelector('#neckGuide');
+      const timer = container.querySelector('#neckTimer');
+      const btn = container.querySelector('#neckBtn');
+      const dots = container.querySelectorAll('#neckDots .phase-dot');
+      const STEPS = [
+        { name: '缓慢低下头，下巴靠近胸口', cls: 'tilt-f', dur: 5000 },
+        { name: '缓慢抬起头，看向天花板', cls: 'tilt-b', dur: 5000 },
+        { name: '头向左侧倾斜，左耳靠近左肩', cls: 'tilt-l', dur: 5000 },
+        { name: '头向右侧倾斜，右耳靠近右肩', cls: 'tilt-r', dur: 5000 },
+        { name: '头部缓慢画圈', cls: 'tilt-circle', dur: 10000 }
+      ];
+      let running = false, paused = false, stepIdx = 0, stepTimer = null, countInt = null, remTime = 0;
+
+      function updateDots() {
+        dots.forEach((dot, i) => { dot.classList.remove('active', 'completed'); if (i < stepIdx) dot.classList.add('completed'); else if (i === stepIdx) dot.classList.add('active'); });
+      }
+      function clearCls() { ['tilt-l','tilt-r','tilt-f','tilt-b','tilt-circle'].forEach(c => head.classList.remove(c)); }
+      function runStep() {
+        if (!running || paused) return;
+        if (stepIdx >= STEPS.length) { finish(); return; }
+        const s = STEPS[stepIdx]; clearCls(); head.classList.add(s.cls);
+        guide.textContent = s.name; timer.textContent = Math.ceil(s.dur / 1000);
+        updateDots();
+        const start = Date.now();
+        countInt = setInterval(() => { timer.textContent = Math.max(0, Math.ceil((s.dur - (Date.now() - start)) / 1000)); }, 200);
+        stepTimer = setTimeout(() => { clearInterval(countInt); stepIdx++; runStep(); }, s.dur);
+      }
+      function start() { running = true; paused = false; stepIdx = 0; btn.textContent = '暂停'; btn.classList.remove('btn-start','btn-restart'); btn.classList.add('btn-pause'); runStep(); }
+      function pause() { paused = true; clearInterval(countInt); clearTimeout(stepTimer); remTime = STEPS[stepIdx].dur - (parseInt(timer.textContent) * 1000); guide.textContent = '已暂停'; btn.textContent = '继续'; btn.classList.remove('btn-pause'); btn.classList.add('btn-start'); }
+      function resume() { paused = false; btn.textContent = '暂停'; btn.classList.remove('btn-start'); btn.classList.add('btn-pause'); guide.textContent = STEPS[stepIdx].name; head.classList.add(STEPS[stepIdx].cls); const start = Date.now() - (STEPS[stepIdx].dur - remTime); countInt = setInterval(() => { timer.textContent = Math.max(0, Math.ceil((STEPS[stepIdx].dur - (Date.now() - start)) / 1000)); }, 200); stepTimer = setTimeout(() => { clearInterval(countInt); stepIdx++; runStep(); }, remTime); }
+      function finish() { running = false; clearCls(); guide.textContent = '完成！颈部已放松'; timer.textContent = '--'; dots.forEach(d => d.classList.remove('active','completed')); btn.textContent = '再来一次'; btn.classList.remove('btn-pause'); btn.classList.add('btn-restart'); }
+      btn.onclick = () => { const t = btn.textContent; if (t === '开始' || t === '再来一次') start(); else if (t === '暂停') pause(); else if (t === '继续') resume(); };
+      exerciseApps.neck = { cleanup: () => { running = false; clearInterval(countInt); clearTimeout(stepTimer); clearCls(); } };
+    }
+
+    function initWristStretch(container) {
+      const hl = container.querySelector('#wristL'), hr = container.querySelector('#wristR');
+      const guide = container.querySelector('#wristGuide');
+      const timer = container.querySelector('#wristTimer');
+      const btn = container.querySelector('#wristBtn');
+      const dots = container.querySelectorAll('#wristDots .phase-dot');
+      const STEPS = [
+        { name: '手掌向上弯曲，指尖指向身体', cls: 'flex-up', dur: 10000 },
+        { name: '手掌向下弯曲，指尖指向地面', cls: 'flex-down', dur: 10000 },
+        { name: '双手腕同时转圈', cls: 'shake', dur: 10000 },
+        { name: '双手自然下垂，轻轻抖动', cls: '', dur: 10000 }
+      ];
+      let running = false, paused = false, stepIdx = 0, stepTimer = null, countInt = null, remTime = 0;
+      function setCls(cls) { ['flex-up','flex-down','shake'].forEach(c => { hl.classList.remove(c); hr.classList.remove(c); }); if (cls) { hl.classList.add(cls); hr.classList.add(cls); } }
+      function updateDots() { dots.forEach((dot, i) => { dot.classList.remove('active','completed'); if (i < stepIdx) dot.classList.add('completed'); else if (i === stepIdx) dot.classList.add('active'); }); }
+      function runStep() { if (!running || paused) return; if (stepIdx >= STEPS.length) { finish(); return; } const s = STEPS[stepIdx]; setCls(s.cls); guide.textContent = s.name; timer.textContent = Math.ceil(s.dur / 1000); updateDots(); const start = Date.now(); countInt = setInterval(() => { timer.textContent = Math.max(0, Math.ceil((s.dur - (Date.now() - start)) / 1000)); }, 200); stepTimer = setTimeout(() => { clearInterval(countInt); stepIdx++; runStep(); }, s.dur); }
+      function start() { running = true; paused = false; stepIdx = 0; btn.textContent = '暂停'; btn.classList.remove('btn-start','btn-restart'); btn.classList.add('btn-pause'); runStep(); }
+      function pause() { paused = true; clearInterval(countInt); clearTimeout(stepTimer); remTime = STEPS[stepIdx].dur - (parseInt(timer.textContent) * 1000); guide.textContent = '已暂停'; btn.textContent = '继续'; btn.classList.remove('btn-pause'); btn.classList.add('btn-start'); }
+      function resume() { paused = false; btn.textContent = '暂停'; btn.classList.remove('btn-start'); btn.classList.add('btn-pause'); guide.textContent = STEPS[stepIdx].name; setCls(STEPS[stepIdx].cls); const start = Date.now() - (STEPS[stepIdx].dur - remTime); countInt = setInterval(() => { timer.textContent = Math.max(0, Math.ceil((STEPS[stepIdx].dur - (Date.now() - start)) / 1000)); }, 200); stepTimer = setTimeout(() => { clearInterval(countInt); stepIdx++; runStep(); }, remTime); }
+      function finish() { running = false; setCls(''); guide.textContent = '完成！手腕已放松'; timer.textContent = '--'; dots.forEach(d => d.classList.remove('active','completed')); btn.textContent = '再来一次'; btn.classList.remove('btn-pause'); btn.classList.add('btn-restart'); }
+      btn.onclick = () => { const t = btn.textContent; if (t === '开始' || t === '再来一次') start(); else if (t === '暂停') pause(); else if (t === '继续') resume(); };
+      exerciseApps.wrist = { cleanup: () => { running = false; clearInterval(countInt); clearTimeout(stepTimer); setCls(''); } };
+    }
+
+    function initShoulderRoll(container) {
+      const sl = container.querySelector('#shLeft'), sr = container.querySelector('#shRight');
+      const guide = container.querySelector('#shGuide');
+      const timer = container.querySelector('#shTimer');
+      const btn = container.querySelector('#shBtn');
+      const dots = container.querySelectorAll('#shDots .phase-dot');
+      const PHASES = [
+        { name: '双肩缓慢向后滚动', reps: 5, interval: 3000, lc: 'tilt-back', rc: 'tilt-back' },
+        { name: '双肩缓慢向前滚动', reps: 5, interval: 3000, lc: 'tilt-forward', rc: 'tilt-forward' }
+      ];
+      let running = false, paused = false, phaseIdx = 0, repIdx = 0, repTimer = null, pauseRep = 0;
+      function updateDots() { dots.forEach((dot, i) => { dot.classList.remove('active','completed'); if (i < phaseIdx) dot.classList.add('completed'); else if (i === phaseIdx) dot.classList.add('active'); }); }
+      function clearCls() { ['tilt-back','tilt-forward'].forEach(c => { sl.classList.remove(c); sr.classList.remove(c); }); }
+      function runRep() { if (!running || paused) return; const p = PHASES[phaseIdx]; if (repIdx >= p.reps) { phaseIdx++; repIdx = 0; if (phaseIdx >= PHASES.length) { finish(); return; } runPhase(); return; } repIdx++; clearCls(); sl.classList.add(p.lc); sr.classList.add(p.rc); timer.textContent = `${p.name.includes('后') ? '向后' : '向前'} x${repIdx}/${p.reps}`; setTimeout(() => clearCls(), p.interval * 0.6); repTimer = setTimeout(() => runRep(), p.interval); }
+      function runPhase() { if (!running || paused) return; guide.textContent = PHASES[phaseIdx].name; updateDots(); runRep(); }
+      function start() { running = true; paused = false; phaseIdx = 0; repIdx = 0; btn.textContent = '暂停'; btn.classList.remove('btn-start','btn-restart'); btn.classList.add('btn-pause'); runPhase(); }
+      function pause() { paused = true; clearTimeout(repTimer); guide.textContent = '已暂停'; btn.textContent = '继续'; btn.classList.remove('btn-pause'); btn.classList.add('btn-start'); pauseRep = repIdx; }
+      function resume() { paused = false; btn.textContent = '暂停'; btn.classList.remove('btn-start'); btn.classList.add('btn-pause'); guide.textContent = PHASES[phaseIdx].name; repIdx = pauseRep; runRep(); }
+      function finish() { running = false; clearCls(); guide.textContent = '完成！肩部已放松'; timer.textContent = '--'; dots.forEach(d => d.classList.remove('active','completed')); btn.textContent = '再来一次'; btn.classList.remove('btn-pause'); btn.classList.add('btn-restart'); }
+      btn.onclick = () => { const t = btn.textContent; if (t === '开始' || t === '再来一次') start(); else if (t === '暂停') pause(); else if (t === '继续') resume(); };
+      exerciseApps.shoulder = { cleanup: () => { running = false; clearTimeout(repTimer); clearCls(); } };
+    }
+
+    function initBodyScan(container) {
+      const beam = container.querySelector('#scanBeam');
+      const guide = container.querySelector('#scanGuide');
+      const timer = container.querySelector('#scanTimer');
+      const btn = container.querySelector('#scanBtn');
+      const SEGMENTS = [
+        { name: '感受头顶、额头和面部', top: '0px', dur: 30000 },
+        { name: '感受颈部和喉咙', top: '24px', dur: 30000 },
+        { name: '感受双肩和上背部', top: '48px', dur: 30000 },
+        { name: '感受胸腔和呼吸', top: '72px', dur: 30000 },
+        { name: '感受腹部和内脏', top: '96px', dur: 30000 },
+        { name: '感受双腿和双脚', top: '120px', dur: 30000 }
+      ];
+      let running = false, paused = false, segIdx = 0, segTimer = null, updInt = null, startTime = 0, pausedElapsed = 0;
+      function updateTimer() { if (!running || paused) return; const elapsed = Date.now() - startTime + pausedElapsed; const remaining = Math.max(0, 180000 - elapsed); const m = Math.floor(remaining / 60000).toString(); const s = Math.floor((remaining % 60000) / 1000).toString().padStart(2, '0'); timer.textContent = `${m}:${s}`; if (remaining <= 0) finish(); }
+      function runSeg() { if (!running || paused) return; if (segIdx >= SEGMENTS.length) { finish(); return; } const s = SEGMENTS[segIdx]; guide.textContent = s.name; beam.style.top = s.top; segTimer = setTimeout(() => { segIdx++; runSeg(); }, s.dur); }
+      function start() { running = true; paused = false; segIdx = 0; pausedElapsed = 0; startTime = Date.now(); btn.textContent = '暂停'; btn.classList.remove('btn-start','btn-restart'); btn.classList.add('btn-pause'); updInt = setInterval(updateTimer, 500); runSeg(); }
+      function pause() { paused = true; clearTimeout(segTimer); clearInterval(updInt); pausedElapsed += Date.now() - startTime; guide.textContent = '已暂停'; btn.textContent = '继续'; btn.classList.remove('btn-pause'); btn.classList.add('btn-start'); }
+      function resume() { paused = false; btn.textContent = '暂停'; btn.classList.remove('btn-start'); btn.classList.add('btn-pause'); guide.textContent = SEGMENTS[segIdx].name; startTime = Date.now(); updInt = setInterval(updateTimer, 500); segTimer = setTimeout(() => { segIdx++; runSeg(); }, SEGMENTS[segIdx].dur); }
+      function finish() { running = false; clearTimeout(segTimer); clearInterval(updInt); guide.textContent = '扫描完成。慢慢睁开眼睛'; timer.textContent = '完成'; beam.style.opacity = '0'; btn.textContent = '再来一次'; btn.classList.remove('btn-pause'); btn.classList.add('btn-restart'); }
+      btn.onclick = () => { const t = btn.textContent; if (t === '开始' || t === '再来一次') start(); else if (t === '暂停') pause(); else if (t === '继续') resume(); };
+      exerciseApps.scan = { cleanup: () => { running = false; clearTimeout(segTimer); clearInterval(updInt); } };
+    }
+
+    // ========== 初始化默认模块 ==========
+    activeApp = new BreathingApp(document.getElementById('mod-box'));
+
+    // ========== 键盘快捷键 ==========
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && currentModuleId.startsWith('box')) {
+        e.preventDefault();
+        if (activeApp && activeApp.onBtnClick) activeApp.onBtnClick();
+      }
+      if (e.code === 'Escape') {
+        if (bottomPanel.classList.contains('open')) closePanel();
+        else if (activeApp && activeApp.reset) {
+          if (confirm('确定要结束当前练习吗？')) activeApp.reset();
+        }
+      }
+    });
   </script>
 </body>
 </html>
