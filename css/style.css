@@ -76,7 +76,7 @@ body {
   letter-spacing: 1px;
 }
 
-/* ===== GitHub 链接 ===== */
+/* ===== GitHub 链接 & 主题切换 ===== */
 .github-link {
   position: fixed;
   top: 1rem;
@@ -105,6 +105,60 @@ body {
 .github-icon {
   width: 18px;
   height: 18px;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 3.2rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(139, 180, 220, 0.15);
+  color: #8b949e;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.theme-toggle:hover {
+  background: rgba(139, 180, 220, 0.12);
+  border-color: rgba(139, 180, 220, 0.3);
+  color: #c0d0d8;
+  transform: translateY(-1px);
+}
+
+.theme-icon-sun,
+.theme-icon-moon {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.theme-icon-sun {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.theme-icon-moon {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+body.theme-warm .theme-icon-sun {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+body.theme-warm .theme-icon-moon {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* ===== 主舞台 ===== */
@@ -1035,5 +1089,409 @@ body {
     height: 100vh;
     max-height: 100vh;
     overflow: hidden;
+  }
+}
+
+/* ============================================================
+   暖色调主题 (Warm Theme) — 日落感 / Calm App 风格
+   ============================================================ */
+
+/* 基础过渡 */
+body, .github-link, .theme-toggle, .bottom-bar, .bottom-panel, .panel-header,
+.btn, .setting-item, .setting-item select, .panel-item, .panel-close,
+.module-toggle, .instruction-card, .stats-bar, .tip-box, .article-content blockquote {
+  transition: background 0.5s ease, border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* 背景渐变 */
+body.theme-warm {
+  background: linear-gradient(160deg, #1a1512 0%, #221a14 30%, #2a1f18 50%, #221a14 70%, #1a1512 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+  color: #d4c5b5;
+}
+
+/* 粒子 */
+body.theme-warm .particle {
+  background: rgba(200, 160, 120, 0.12);
+}
+
+/* 头部 */
+body.theme-warm .spa-header h1 {
+  color: #f0e6d8;
+}
+
+body.theme-warm .spa-header p {
+  color: #a89080;
+}
+
+/* GitHub & Theme Toggle */
+body.theme-warm .github-link,
+body.theme-warm .theme-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(200, 160, 120, 0.15);
+  color: #a89080;
+}
+
+body.theme-warm .github-link:hover,
+body.theme-warm .theme-toggle:hover {
+  background: rgba(200, 160, 120, 0.12);
+  border-color: rgba(200, 160, 120, 0.3);
+  color: #d4c5b5;
+}
+
+/* 模块标题 */
+body.theme-warm .mod-title {
+  color: #f0e6d8;
+}
+
+body.theme-warm .mod-subtitle {
+  color: #a89080;
+}
+
+body.theme-warm .mod-desc {
+  color: #b8a898;
+}
+
+/* 呼吸环 */
+body.theme-warm .ring-track circle {
+  stroke: rgba(200, 160, 120, 0.1);
+}
+
+body.theme-warm .ring-progress circle {
+  stroke: url(#ringGradientWarm);
+}
+
+body.theme-warm .breath-circle {
+  background: radial-gradient(circle at 35% 35%, rgba(200, 160, 120, 0.45), rgba(160, 120, 80, 0.2), rgba(120, 80, 50, 0.08));
+  box-shadow: 0 0 25px rgba(160, 120, 80, 0.12), 0 0 50px rgba(160, 120, 80, 0.06), inset 0 0 15px rgba(255, 255, 255, 0.04);
+}
+
+@keyframes inhaleWarm {
+  from { width: 130px; height: 130px; box-shadow: 0 0 25px rgba(160, 120, 80, 0.12); }
+  to { width: 210px; height: 210px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
+}
+@keyframes holdWarm {
+  from { width: 210px; height: 210px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
+  to { width: 210px; height: 210px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
+}
+@keyframes exhaleWarm {
+  from { width: 210px; height: 210px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
+  to { width: 130px; height: 130px; box-shadow: 0 0 25px rgba(160, 120, 80, 0.12); }
+}
+
+body.theme-warm .breath-circle.inhale,
+body.theme-warm .breath-circle.inhale-s5,
+body.theme-warm .breath-circle.inhale-478 {
+  animation-name: inhaleWarm;
+}
+
+body.theme-warm .breath-circle.hold,
+body.theme-warm .breath-circle.hold-s5,
+body.theme-warm .breath-circle.hold-478 {
+  animation-name: holdWarm;
+}
+
+body.theme-warm .breath-circle.exhale,
+body.theme-warm .breath-circle.exhale-s5,
+body.theme-warm .breath-circle.exhale-478 {
+  animation-name: exhaleWarm;
+}
+
+body.theme-warm .breath-label {
+  color: #f0e6d8;
+}
+
+body.theme-warm .timer,
+body.theme-warm .exercise-timer {
+  color: #d4a574;
+}
+
+/* 阶段点 */
+body.theme-warm .phase-dot {
+  background: rgba(200, 160, 120, 0.15);
+}
+
+body.theme-warm .phase-dot.active {
+  background: rgba(220, 180, 130, 0.7);
+  box-shadow: 0 0 8px rgba(220, 180, 130, 0.3);
+}
+
+body.theme-warm .phase-dot.completed {
+  background: rgba(200, 160, 120, 0.35);
+}
+
+/* 按钮 */
+body.theme-warm .btn-start {
+  background: linear-gradient(135deg, #8a6a4a, #6a4a2a);
+  color: #f0e0c8;
+  box-shadow: 0 4px 20px rgba(106, 74, 42, 0.3);
+}
+
+body.theme-warm .btn-start:hover {
+  box-shadow: 0 6px 25px rgba(106, 74, 42, 0.4);
+}
+
+body.theme-warm .btn-pause {
+  background: linear-gradient(135deg, #7a6a3a, #5a4a1a);
+  color: #f0e8c0;
+  box-shadow: 0 4px 20px rgba(90, 74, 26, 0.3);
+}
+
+body.theme-warm .btn-restart {
+  background: linear-gradient(135deg, #6a5a4a, #4a3a2a);
+  color: #e0d0c0;
+  box-shadow: 0 4px 20px rgba(74, 58, 42, 0.3);
+}
+
+/* 设置项 */
+body.theme-warm .setting-item {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+body.theme-warm .setting-item label,
+body.theme-warm .toggle-sound span {
+  color: #b8a898;
+}
+
+body.theme-warm .setting-item select {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #d4c5b5;
+}
+
+body.theme-warm .setting-item select option {
+  background: #2a1f18;
+  color: #d4c5b5;
+}
+
+body.theme-warm .toggle-sound input {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+body.theme-warm .toggle-sound input::after {
+  background: #9a7a5a;
+}
+
+body.theme-warm .toggle-sound input:checked {
+  background: rgba(180, 140, 100, 0.25);
+}
+
+body.theme-warm .toggle-sound input:checked::after {
+  background: #d4a574;
+}
+
+/* 统计栏 */
+body.theme-warm .stats-bar {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+body.theme-warm .stat-value {
+  color: #d4a574;
+}
+
+body.theme-warm .stat-label {
+  color: #a89080;
+}
+
+/* 说明卡片 */
+body.theme-warm .instruction-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+body.theme-warm .instruction-card h3 {
+  color: #b8a898;
+}
+
+body.theme-warm .flow-step .step-icon {
+  background: rgba(200, 160, 120, 0.1);
+  color: #b8a898;
+}
+
+body.theme-warm .flow-step .step-name {
+  color: #a89080;
+}
+
+body.theme-warm .flow-arrow {
+  color: #8a7a6a;
+}
+
+/* 放松技巧 */
+body.theme-warm .exercise-guide {
+  color: #d4c5b5;
+}
+
+body.theme-warm .eye-shape {
+  border-color: rgba(200, 160, 120, 0.2);
+}
+
+body.theme-warm .eye-shape.resting {
+  border-color: rgba(200, 160, 120, 0.4);
+  box-shadow: 0 0 30px rgba(160, 120, 80, 0.12);
+}
+
+body.theme-warm .eye-pupil {
+  background: radial-gradient(circle at 35% 35%, rgba(220, 180, 130, 0.5), rgba(120, 80, 50, 0.2));
+  border-color: rgba(200, 160, 120, 0.2);
+}
+
+body.theme-warm .neck-head {
+  background: radial-gradient(circle at 40% 40%, rgba(200, 160, 120, 0.2), rgba(120, 80, 50, 0.08));
+  border-color: rgba(200, 160, 120, 0.12);
+}
+
+body.theme-warm .wrist-hand {
+  background: rgba(200, 160, 120, 0.08);
+  border-color: rgba(200, 160, 120, 0.12);
+}
+
+body.theme-warm .scan-body {
+  background: rgba(200, 160, 120, 0.06);
+  border-color: rgba(200, 160, 120, 0.1);
+}
+
+body.theme-warm .scan-head {
+  background: rgba(200, 160, 120, 0.08);
+  border-color: rgba(200, 160, 120, 0.12);
+}
+
+body.theme-warm .scan-beam {
+  background: rgba(220, 180, 130, 0.12);
+  box-shadow: 0 0 15px rgba(220, 180, 130, 0.08);
+}
+
+/* 文章 */
+body.theme-warm .article-content {
+  color: #b8a898;
+}
+
+body.theme-warm .article-content h3 {
+  color: #f0e6d8;
+  border-bottom-color: rgba(200, 160, 120, 0.1);
+}
+
+body.theme-warm .article-content h4 {
+  color: #d4c5b5;
+}
+
+body.theme-warm .article-content strong {
+  color: #f0e6d8;
+}
+
+body.theme-warm .article-content blockquote {
+  border-left-color: rgba(200, 160, 120, 0.25);
+  background: rgba(200, 160, 120, 0.04);
+  color: #d4a574;
+}
+
+body.theme-warm .tip-box {
+  background: rgba(200, 160, 120, 0.05);
+  border-color: rgba(200, 160, 120, 0.1);
+}
+
+body.theme-warm .tip-title {
+  color: #d4a574;
+}
+
+body.theme-warm .article-source {
+  color: #8a7a6a;
+  border-top-color: rgba(200, 160, 120, 0.1);
+}
+
+/* 底部栏 */
+body.theme-warm .bottom-bar {
+  background: rgba(26, 21, 18, 0.9);
+  border-top-color: rgba(200, 160, 120, 0.1);
+}
+
+body.theme-warm .module-toggle {
+  background: rgba(200, 160, 120, 0.1);
+  border-color: rgba(200, 160, 120, 0.2);
+  color: #d4c5b5;
+}
+
+body.theme-warm .module-toggle:hover {
+  background: rgba(200, 160, 120, 0.18);
+}
+
+/* 底部面板 */
+body.theme-warm .bottom-panel {
+  background: rgba(34, 26, 20, 0.7);
+  border-top-color: rgba(200, 160, 120, 0.12);
+}
+
+body.theme-warm .panel-header {
+  background: rgba(34, 26, 20, 0.7);
+}
+
+body.theme-warm .panel-header h3 {
+  color: #f0e6d8;
+}
+
+body.theme-warm .panel-close {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #a89080;
+}
+
+body.theme-warm .panel-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f0e6d8;
+}
+
+body.theme-warm .panel-group h4 {
+  color: #a89080;
+}
+
+body.theme-warm .panel-item {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+body.theme-warm .panel-item:hover {
+  background: rgba(200, 160, 120, 0.1);
+  border-color: rgba(200, 160, 120, 0.2);
+}
+
+body.theme-warm .panel-item.active {
+  background: rgba(200, 160, 120, 0.12);
+  border-color: rgba(200, 160, 120, 0.3);
+}
+
+body.theme-warm .panel-item .pi-title {
+  color: #d4c5b5;
+}
+
+body.theme-warm .panel-item .pi-desc {
+  color: #a89080;
+}
+
+/* 庆祝粒子 */
+body.theme-warm .celebration-particle {
+  background: rgba(220, 180, 130, 0.6);
+}
+
+/* 滚动条 */
+body.theme-warm .module::-webkit-scrollbar-thumb,
+body.theme-warm .article-content::-webkit-scrollbar-thumb {
+  background: rgba(200, 160, 120, 0.15);
+}
+
+/* 响应式暖色呼吸动画 */
+@media (max-width: 480px) {
+  @keyframes inhaleWarm {
+    from { width: 110px; height: 110px; box-shadow: 0 0 25px rgba(160, 120, 80, 0.12); }
+    to { width: 170px; height: 170px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
+  }
+  @keyframes holdWarm {
+    from { width: 170px; height: 170px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
+    to { width: 170px; height: 170px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
+  }
+  @keyframes exhaleWarm {
+    from { width: 170px; height: 170px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
+    to { width: 110px; height: 110px; box-shadow: 0 0 25px rgba(160, 120, 80, 0.12); }
   }
 }
