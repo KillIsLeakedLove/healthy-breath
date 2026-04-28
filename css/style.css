@@ -4,27 +4,105 @@
   box-sizing: border-box;
 }
 
+/* ============================================================
+   CSS Custom Properties (Design Tokens)
+   ============================================================ */
+
+:root {
+  /* Cool Theme (Default) */
+  --color-bg-primary: #0c1220;
+  --color-bg-secondary: #111827;
+  --color-bg-tertiary: #1a2332;
+  --color-accent: #7aa7c8;
+  --color-accent-soft: rgba(122, 167, 200, 0.15);
+  --color-accent-glow: rgba(122, 167, 200, 0.25);
+  --color-text-primary: #e8ecf1;
+  --color-text-secondary: #9fb0c0;
+  --color-text-muted: #6b7d8e;
+  --color-text-on-accent: #0c1220;
+  --color-border: rgba(122, 167, 200, 0.12);
+  --color-border-subtle: rgba(122, 167, 200, 0.06);
+  --color-ring-track: rgba(122, 167, 200, 0.10);
+  --color-ring-progress-start: #5a8aaa;
+  --color-ring-progress-end: #8ab8d8;
+  --color-particle: rgba(122, 167, 200, 0.12);
+  --color-celebration: rgba(138, 184, 216, 0.6);
+
+  /* Opacity */
+  --opacity-hover: 0.08;
+  --opacity-active: 0.12;
+  --opacity-disabled: 0.4;
+  --opacity-backdrop: 0.7;
+
+  /* Typography */
+  --text-hero: 1.75rem;
+  --text-title: 1.5rem;
+  --text-subtitle: 0.85rem;
+  --text-body: 0.9rem;
+  --text-label: 0.8rem;
+  --text-timer: 2.6rem;
+  --text-timer-small: 2.2rem;
+  --text-phase: 1.2rem;
+  --text-stat: 1rem;
+  --text-stat-label: 0.65rem;
+  --text-button: 0.95rem;
+  --text-caption: 0.7rem;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+
+  /* Radius */
+  --radius-none: 0;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+  --radius-full: 50%;
+}
+
+/* Warm Theme */
+body.theme-warm {
+  --color-bg-primary: #1a1510;
+  --color-bg-secondary: #221a14;
+  --color-bg-tertiary: #2a2018;
+  --color-accent: #c9a06a;
+  --color-accent-soft: rgba(201, 160, 106, 0.15);
+  --color-accent-glow: rgba(201, 160, 106, 0.25);
+  --color-text-primary: #f0e6d8;
+  --color-text-secondary: #b8a898;
+  --color-text-muted: #8a7a6a;
+  --color-text-on-accent: #1a1510;
+  --color-border: rgba(201, 160, 106, 0.12);
+  --color-border-subtle: rgba(201, 160, 106, 0.06);
+  --color-ring-track: rgba(201, 160, 106, 0.10);
+  --color-ring-progress-start: #a07848;
+  --color-ring-progress-end: #d4b078;
+  --color-particle: rgba(201, 160, 106, 0.12);
+  --color-celebration: rgba(212, 176, 120, 0.6);
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  background: linear-gradient(160deg, #0d1117 0%, #161b22 30%, #1c2330 50%, #161b22 70%, #0d1117 100%);
-  background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
-  color: #c9d1d9;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--color-bg-primary);
+  color: var(--color-text-secondary);
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* ===== 粒子背景 ===== */
+/* ============================================================
+   Particle Background
+   ============================================================ */
 .particles {
   position: fixed;
   inset: 0;
@@ -34,8 +112,8 @@ body {
 
 .particle {
   position: absolute;
-  border-radius: 50%;
-  background: rgba(139, 180, 220, 0.12);
+  border-radius: var(--radius-full);
+  background: var(--color-particle);
   animation: floatUp linear infinite;
 }
 
@@ -46,7 +124,9 @@ body {
   100% { transform: translateY(-10vh) scale(1); opacity: 0; }
 }
 
-/* ===== SPA 布局 ===== */
+/* ============================================================
+   SPA Layout
+   ============================================================ */
 .spa-body {
   height: 100vh;
   display: flex;
@@ -58,85 +138,67 @@ body {
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 1.2rem 1rem 0.6rem;
+  padding: var(--space-lg) var(--space-lg) var(--space-sm);
   flex-shrink: 0;
 }
 
 .spa-header h1 {
-  font-size: 1.8rem;
+  font-size: var(--text-hero);
   font-weight: 300;
   letter-spacing: 4px;
-  color: #e6edf3;
-  margin-bottom: 0.3rem;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
 }
 
 .spa-header p {
-  font-size: 0.85rem;
-  color: #8b949e;
+  font-size: var(--text-subtitle);
+  color: var(--color-text-muted);
   letter-spacing: 1px;
 }
 
-/* ===== GitHub 链接 & 主题切换 ===== */
-.github-link {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(139, 180, 220, 0.15);
-  color: #8b949e;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-.github-link:hover {
-  background: rgba(139, 180, 220, 0.12);
-  border-color: rgba(139, 180, 220, 0.3);
-  color: #c0d0d8;
-  transform: translateY(-1px);
-}
-
-.github-icon {
-  width: 18px;
-  height: 18px;
-}
-
+/* ============================================================
+   GitHub Link & Theme Toggle
+   ============================================================ */
+.github-link,
 .theme-toggle {
   position: fixed;
-  top: 1rem;
-  right: 3.2rem;
+  top: var(--space-lg);
   z-index: 50;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(139, 180, 220, 0.15);
-  color: #8b949e;
-  cursor: pointer;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
   transition: all 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
   padding: 0;
 }
 
+.github-link { right: var(--space-lg); }
+.theme-toggle { right: 3.2rem; }
+
+.github-link:hover,
 .theme-toggle:hover {
-  background: rgba(139, 180, 220, 0.12);
-  border-color: rgba(139, 180, 220, 0.3);
-  color: #c0d0d8;
+  background: var(--color-accent-soft);
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
   transform: translateY(-1px);
 }
 
+.github-icon,
 .theme-icon-sun,
 .theme-icon-moon {
   width: 18px;
   height: 18px;
+}
+
+.theme-icon-sun,
+.theme-icon-moon {
   position: absolute;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -161,14 +223,16 @@ body.theme-warm .theme-icon-moon {
   transform: scale(1);
 }
 
-/* ===== 主舞台 ===== */
+/* ============================================================
+   Main Stage & Modules
+   ============================================================ */
 .main-stage {
   position: relative;
   z-index: 1;
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 var(--space-lg);
   flex: 1;
   min-height: 0;
   display: flex;
@@ -190,7 +254,6 @@ body.theme-warm .theme-icon-moon {
   animation: moduleIn 0.45s ease forwards;
 }
 
-/* Scrollbar styling for module content */
 .module::-webkit-scrollbar {
   width: 4px;
 }
@@ -198,7 +261,7 @@ body.theme-warm .theme-icon-moon {
   background: transparent;
 }
 .module::-webkit-scrollbar-thumb {
-  background: rgba(139, 180, 220, 0.15);
+  background: var(--color-accent-soft);
   border-radius: 2px;
 }
 
@@ -212,49 +275,54 @@ body.theme-warm .theme-icon-moon {
   to { opacity: 0; transform: translateY(-20px); }
 }
 
-/* ===== 模块内通用 ===== */
+/* ============================================================
+   Module Typography
+   ============================================================ */
 .mod-title {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: var(--text-title);
   font-weight: 300;
-  color: #e6edf3;
-  margin-bottom: 0.2rem;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
   letter-spacing: 2px;
 }
 
 .mod-subtitle {
   text-align: center;
-  font-size: 0.85rem;
-  color: #8b949e;
-  margin-bottom: 1.2rem;
+  font-size: var(--text-subtitle);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-lg);
 }
 
 .mod-desc {
   text-align: center;
-  font-size: 0.9rem;
-  color: #a0aab4;
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
   line-height: 1.7;
-  margin-bottom: 1.2rem;
-  padding: 0 0.5rem;
+  margin-bottom: var(--space-lg);
+  padding: 0 var(--space-sm);
 }
 
-/* ===== 呼吸法通用 ===== */
+/* ============================================================
+   Breathing Stage (Ring + Circle + Timer + Label)
+   ============================================================ */
 .breath-stage {
   position: relative;
   width: 260px;
   height: 260px;
-  margin: 0 auto 1.2rem;
+  margin: 0 auto var(--space-lg);
   flex-shrink: 0;
 }
 
 .ring-track {
   position: absolute;
   inset: 0;
+  z-index: 1;
 }
 
 .ring-track circle {
   fill: none;
-  stroke: rgba(139, 180, 220, 0.1);
+  stroke: var(--color-ring-track);
   stroke-width: 3;
 }
 
@@ -262,6 +330,7 @@ body.theme-warm .theme-icon-moon {
   position: absolute;
   inset: 0;
   transform: rotate(-90deg);
+  z-index: 2;
 }
 
 .ring-progress circle {
@@ -274,6 +343,11 @@ body.theme-warm .theme-icon-moon {
   transition: stroke-dashoffset 0.1s linear;
 }
 
+body.theme-warm .ring-progress circle {
+  stroke: url(#ringGradientWarm);
+}
+
+/* Breathing Circle — contains timer and label inside */
 .breath-circle {
   position: absolute;
   top: 50%;
@@ -281,11 +355,46 @@ body.theme-warm .theme-icon-moon {
   transform: translate(-50%, -50%);
   width: 130px;
   height: 130px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, rgba(139, 180, 220, 0.45), rgba(100, 140, 180, 0.2), rgba(70, 100, 140, 0.08));
-  box-shadow: 0 0 25px rgba(100, 140, 180, 0.12), 0 0 50px rgba(100, 140, 180, 0.06), inset 0 0 15px rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle at 35% 35%, var(--color-accent-soft), rgba(122, 167, 200, 0.08), transparent);
+  box-shadow: 0 0 25px var(--color-accent-glow), 0 0 50px rgba(122, 167, 200, 0.06), inset 0 0 15px rgba(255, 255, 255, 0.04);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
+body.theme-warm .breath-circle {
+  background: radial-gradient(circle at 35% 35%, var(--color-accent-soft), rgba(201, 160, 106, 0.08), transparent);
+  box-shadow: 0 0 25px var(--color-accent-glow), 0 0 50px rgba(201, 160, 106, 0.06), inset 0 0 15px rgba(255, 255, 255, 0.04);
+}
+
+/* Timer inside the breathing circle */
+.breath-timer {
+  font-size: var(--text-timer);
+  font-weight: 200;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  text-align: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Phase label inside the breathing circle */
+.breath-label {
+  font-size: var(--text-phase);
+  font-weight: 300;
+  letter-spacing: 5px;
+  color: var(--color-text-primary);
+  text-align: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Breathing animations */
 .breath-circle.inhale { animation: inhale 4s ease-in-out forwards; }
 .breath-circle.hold { animation: hold 4s linear forwards; }
 .breath-circle.exhale { animation: exhale 4s ease-in-out forwards; }
@@ -299,49 +408,33 @@ body.theme-warm .theme-icon-moon {
 .breath-circle.exhale-478 { animation: exhale 8s ease-in-out forwards; }
 
 @keyframes inhale {
-  from { width: 130px; height: 130px; box-shadow: 0 0 25px rgba(100, 140, 180, 0.12); }
-  to { width: 210px; height: 210px; box-shadow: 0 0 45px rgba(139, 180, 220, 0.2); }
+  from { width: 130px; height: 130px; box-shadow: 0 0 25px var(--color-accent-glow); }
+  to { width: 210px; height: 210px; box-shadow: 0 0 45px var(--color-accent-glow); }
 }
+
 @keyframes hold {
-  from { width: 210px; height: 210px; box-shadow: 0 0 45px rgba(139, 180, 220, 0.2); }
-  to { width: 210px; height: 210px; box-shadow: 0 0 45px rgba(139, 180, 220, 0.2); }
+  from { width: 210px; height: 210px; box-shadow: 0 0 45px var(--color-accent-glow); }
+  to { width: 210px; height: 210px; box-shadow: 0 0 45px var(--color-accent-glow); }
 }
+
 @keyframes exhale {
-  from { width: 210px; height: 210px; box-shadow: 0 0 45px rgba(139, 180, 220, 0.2); }
-  to { width: 130px; height: 130px; box-shadow: 0 0 25px rgba(100, 140, 180, 0.12); }
+  from { width: 210px; height: 210px; box-shadow: 0 0 45px var(--color-accent-glow); }
+  to { width: 130px; height: 130px; box-shadow: 0 0 25px var(--color-accent-glow); }
 }
+
 @keyframes holdEmpty {
   from { width: 130px; height: 130px; }
   to { width: 130px; height: 130px; }
 }
 
-.breath-label {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.2rem;
-  font-weight: 300;
-  letter-spacing: 5px;
-  color: #e6edf3;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.timer {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 200;
-  color: #8bb4dc;
-  font-variant-numeric: tabular-nums;
-  flex-shrink: 0;
-}
-
+/* ============================================================
+   Phase Dots
+   ============================================================ */
 .phase-dots {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-top: 0.6rem;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
   height: 8px;
   flex-shrink: 0;
 }
@@ -349,33 +442,36 @@ body.theme-warm .theme-icon-moon {
 .phase-dot {
   width: 6px;
   height: 6px;
-  border-radius: 50%;
-  background: rgba(139, 180, 220, 0.15);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-tertiary);
   transition: all 0.4s ease;
 }
 
 .phase-dot.active {
-  background: rgba(139, 200, 240, 0.7);
-  box-shadow: 0 0 8px rgba(139, 200, 240, 0.3);
+  background: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent-glow);
   transform: scale(1.3);
 }
 
 .phase-dot.completed {
-  background: rgba(139, 180, 220, 0.35);
+  background: var(--color-accent-soft);
 }
 
+/* ============================================================
+   Controls
+   ============================================================ */
 .controls {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--space-lg);
   align-items: center;
-  margin-top: 1rem;
+  margin-top: var(--space-lg);
   flex-shrink: 0;
 }
 
 .settings-row {
   display: flex;
-  gap: 0.8rem;
+  gap: var(--space-md);
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
@@ -384,43 +480,43 @@ body.theme-warm .theme-icon-moon {
 .setting-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  gap: var(--space-sm);
+  background: var(--color-bg-tertiary);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
 }
 
 .setting-item label {
-  font-size: 0.8rem;
-  color: #a0aab4;
+  font-size: var(--text-label);
+  color: var(--color-text-secondary);
 }
 
 .setting-item select {
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  padding: 0.25rem 0.5rem;
-  color: #c9d1d9;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  color: var(--color-text-primary);
   font-size: 0.85rem;
   cursor: pointer;
   outline: none;
 }
 
 .setting-item select option {
-  background: #1c2330;
-  color: #c9d1d9;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
 }
 
 .setting-item select:disabled {
-  opacity: 0.4;
+  opacity: var(--opacity-disabled);
   cursor: not-allowed;
 }
 
 .toggle-sound {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 6px;
   cursor: pointer;
   user-select: none;
 }
@@ -429,11 +525,12 @@ body.theme-warm .theme-icon-moon {
   appearance: none;
   width: 32px;
   height: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-pill);
   position: relative;
   cursor: pointer;
   transition: background 0.3s;
+  border: 1px solid var(--color-border-subtle);
 }
 
 .toggle-sound input::after {
@@ -441,32 +538,34 @@ body.theme-warm .theme-icon-moon {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #6a9a9a;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-text-muted);
   transition: transform 0.3s;
 }
 
 .toggle-sound input:checked {
-  background: rgba(100, 160, 180, 0.25);
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent-soft);
 }
 
 .toggle-sound input:checked::after {
-  transform: translateX(16px);
-  background: #8bb4dc;
+  transform: translateX(15px);
+  background: var(--color-accent);
 }
 
 .toggle-sound span {
   font-size: 0.75rem;
-  color: #8b949e;
+  color: var(--color-text-muted);
 }
 
+/* Buttons */
 .btn {
-  padding: 0.75rem 3rem;
-  font-size: 0.95rem;
+  padding: 12px 48px;
+  font-size: var(--text-button);
   border: none;
-  border-radius: 50px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
   transition: all 0.3s ease;
   letter-spacing: 3px;
@@ -496,48 +595,54 @@ body.theme-warm .theme-icon-moon {
   box-shadow: 0 4px 20px rgba(74, 80, 104, 0.3);
 }
 
+/* ============================================================
+   Stats Bar
+   ============================================================ */
 .stats-bar {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin-top: 1rem;
-  padding: 0.6rem 1.2rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  margin-top: var(--space-lg);
+  padding: 10px 20px;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
   flex-shrink: 0;
 }
 
 .stat { text-align: center; }
 
 .stat-value {
-  font-size: 1rem;
+  font-size: var(--text-stat);
   font-weight: 300;
-  color: #8bb4dc;
+  color: var(--color-accent);
   font-variant-numeric: tabular-nums;
 }
 
 .stat-label {
-  font-size: 0.65rem;
-  color: #8b949e;
-  margin-top: 0.1rem;
+  font-size: var(--text-stat-label);
+  color: var(--color-text-muted);
+  margin-top: 2px;
   letter-spacing: 1px;
 }
 
+/* ============================================================
+   Instruction Card
+   ============================================================ */
 .instruction-card {
-  margin-top: 1rem;
-  padding: 0.8rem 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  margin-top: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
   flex-shrink: 0;
 }
 
 .instruction-card h3 {
-  font-size: 0.8rem;
+  font-size: var(--text-label);
   font-weight: 400;
-  color: #a0aab4;
-  margin-bottom: 0.4rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
   letter-spacing: 1px;
   text-align: center;
 }
@@ -546,7 +651,7 @@ body.theme-warm .theme-icon-moon {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
+  gap: var(--space-sm);
   flex-wrap: wrap;
 }
 
@@ -554,36 +659,38 @@ body.theme-warm .theme-icon-moon {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.15rem;
+  gap: 2px;
 }
 
 .flow-step .step-icon {
   width: 30px;
   height: 30px;
-  border-radius: 50%;
-  background: rgba(139, 180, 220, 0.1);
+  border-radius: var(--radius-full);
+  background: var(--color-accent-soft);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.7rem;
-  color: #a0aab4;
+  color: var(--color-text-secondary);
 }
 
 .flow-step .step-name {
   font-size: 0.65rem;
-  color: #8b949e;
+  color: var(--color-text-muted);
 }
 
 .flow-arrow {
-  color: #6a7a84;
+  color: var(--color-text-muted);
   font-size: 0.75rem;
 }
 
-/* ===== 放松技巧通用 ===== */
+/* ============================================================
+   Exercise Modules
+   ============================================================ */
 .exercise-visual {
   width: 200px;
   height: 180px;
-  margin: 0 auto 1rem;
+  margin: 0 auto var(--space-lg);
   position: relative;
   display: flex;
   align-items: center;
@@ -594,9 +701,9 @@ body.theme-warm .theme-icon-moon {
 .exercise-guide {
   text-align: center;
   font-size: 1rem;
-  color: #c0d0d8;
+  color: var(--color-text-primary);
   min-height: 1.8rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: var(--space-md);
   flex-shrink: 0;
 }
 
@@ -604,18 +711,18 @@ body.theme-warm .theme-icon-moon {
   text-align: center;
   font-size: 3rem;
   font-weight: 200;
-  color: #8bb4dc;
+  color: var(--color-accent);
   font-variant-numeric: tabular-nums;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-lg);
   flex-shrink: 0;
 }
 
-/* 眼部 */
+/* Eye */
 .eye-shape {
   width: 140px;
   height: 80px;
-  border-radius: 50%;
-  border: 2px solid rgba(139, 180, 220, 0.2);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-accent-soft);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -624,8 +731,8 @@ body.theme-warm .theme-icon-moon {
 }
 
 .eye-shape.resting {
-  border-color: rgba(139, 180, 220, 0.4);
-  box-shadow: 0 0 30px rgba(100, 140, 180, 0.12);
+  border-color: var(--color-accent-glow);
+  box-shadow: 0 0 30px var(--color-accent-glow);
   animation: eyePulse 2s ease-in-out infinite;
 }
 
@@ -637,18 +744,18 @@ body.theme-warm .theme-icon-moon {
 .eye-pupil {
   width: 36px;
   height: 36px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, rgba(139, 200, 240, 0.5), rgba(70, 100, 140, 0.2));
-  border: 1px solid rgba(139, 180, 220, 0.2);
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle at 35% 35%, var(--color-accent-glow), var(--color-accent-soft));
+  border: 1px solid var(--color-accent-soft);
 }
 
-/* 颈部 */
+/* Neck */
 .neck-head {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 40%, rgba(139, 180, 220, 0.2), rgba(70, 100, 140, 0.08));
-  border: 1px solid rgba(139, 180, 220, 0.12);
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle at 40% 40%, var(--color-accent-soft), rgba(122, 167, 200, 0.04));
+  border: 1px solid var(--color-border);
   transition: transform 1.2s ease-in-out;
 }
 
@@ -666,13 +773,13 @@ body.theme-warm .theme-icon-moon {
   100% { transform: translateX(0) rotate(0deg); }
 }
 
-/* 手腕 */
+/* Wrist */
 .wrist-hand {
   width: 50px;
   height: 70px;
-  border-radius: 10px;
-  background: rgba(139, 180, 220, 0.08);
-  border: 1px solid rgba(139, 180, 220, 0.12);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-border);
   transition: transform 1s ease-in-out;
 }
 
@@ -686,7 +793,7 @@ body.theme-warm .theme-icon-moon {
   75% { transform: rotate(8deg); }
 }
 
-/* 扫描 */
+/* Scan */
 .scan-figure {
   width: 100px;
   height: 160px;
@@ -698,8 +805,8 @@ body.theme-warm .theme-icon-moon {
   width: 60px;
   height: 120px;
   border-radius: 30px;
-  background: rgba(139, 180, 220, 0.06);
-  border: 1px solid rgba(139, 180, 220, 0.1);
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-border);
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -709,13 +816,17 @@ body.theme-warm .theme-icon-moon {
 .scan-head {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  background: rgba(139, 180, 220, 0.08);
-  border: 1px solid rgba(139, 180, 220, 0.12);
+  border-radius: var(--radius-full);
+  background: rgba(122, 167, 200, 0.06);
+  border: 1px solid var(--color-border);
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+}
+
+body.theme-warm .scan-head {
+  background: rgba(201, 160, 106, 0.06);
 }
 
 .scan-beam {
@@ -724,18 +835,20 @@ body.theme-warm .theme-icon-moon {
   transform: translateX(-50%);
   width: 70px;
   height: 24px;
-  border-radius: 12px;
-  background: rgba(139, 200, 240, 0.12);
-  box-shadow: 0 0 15px rgba(139, 200, 240, 0.08);
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  box-shadow: 0 0 15px var(--color-accent-glow);
   transition: top 1.5s ease-in-out;
 }
 
-/* ===== 文章 ===== */
+/* ============================================================
+   Article Content
+   ============================================================ */
 .article-content {
   text-align: left;
   line-height: 1.85;
-  color: #a0aab4;
-  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  font-size: var(--text-body);
   flex: 1;
   overflow-y: auto;
 }
@@ -747,80 +860,82 @@ body.theme-warm .theme-icon-moon {
   background: transparent;
 }
 .article-content::-webkit-scrollbar-thumb {
-  background: rgba(139, 180, 220, 0.15);
+  background: var(--color-accent-soft);
   border-radius: 2px;
 }
 
 .article-content h3 {
   font-size: 1.05rem;
   font-weight: 400;
-  color: #e6edf3;
-  margin: 1.5rem 0 0.6rem;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px solid rgba(139, 180, 220, 0.1);
+  color: var(--color-text-primary);
+  margin: var(--space-xl) 0 var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .article-content h4 {
   font-size: 0.95rem;
   font-weight: 400;
-  color: #c0d0d8;
-  margin: 1rem 0 0.4rem;
+  color: var(--color-text-primary);
+  margin: var(--space-lg) 0 var(--space-sm);
 }
 
 .article-content p {
-  margin-bottom: 0.8rem;
+  margin-bottom: var(--space-md);
 }
 
 .article-content ul, .article-content ol {
-  margin: 0.6rem 0 0.8rem 1.2rem;
-  padding-left: 0.3rem;
+  margin: var(--space-sm) 0 var(--space-md) var(--space-lg);
+  padding-left: var(--space-sm);
 }
 
 .article-content li {
-  margin-bottom: 0.4rem;
+  margin-bottom: var(--space-xs);
 }
 
 .article-content blockquote {
-  margin: 1rem 0;
-  padding: 0.7rem 1rem;
-  border-left: 3px solid rgba(139, 180, 220, 0.25);
-  background: rgba(139, 180, 220, 0.04);
-  border-radius: 0 8px 8px 0;
-  color: #8bb4dc;
+  margin: var(--space-lg) 0;
+  padding: var(--space-md) var(--space-lg);
+  border-left: 3px solid var(--color-accent-soft);
+  background: var(--color-accent-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--color-accent);
   font-style: italic;
 }
 
 .article-content strong {
-  color: #e6edf3;
-  font-weight: 500;
+  color: var(--color-text-primary);
+  font-weight: 600;
 }
 
 .tip-box {
-  margin: 1rem 0;
-  padding: 0.8rem 1rem;
-  background: rgba(139, 180, 220, 0.05);
-  border: 1px solid rgba(139, 180, 220, 0.1);
-  border-radius: 10px;
+  margin: var(--space-lg) 0;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
 }
 
 .tip-title {
-  font-size: 0.8rem;
-  color: #8bb4dc;
-  margin-bottom: 0.3rem;
+  font-size: var(--text-label);
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: var(--space-xs);
 }
 
 .article-source {
-  margin-top: 1.5rem;
-  padding-top: 0.8rem;
-  border-top: 1px solid rgba(139, 180, 220, 0.1);
-  font-size: 0.7rem;
-  color: #6a7a84;
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
 }
 
-/* ===== 底部切换栏 ===== */
+/* ============================================================
+   Bottom Bar
+   ============================================================ */
 .bottom-bar {
   position: fixed;
   bottom: 0;
@@ -829,30 +944,35 @@ body.theme-warm .theme-icon-moon {
   z-index: 100;
   display: flex;
   justify-content: center;
-  padding: 0.6rem;
-  background: rgba(13, 17, 23, 0.9);
+  padding: var(--space-sm);
+  background: rgba(17, 24, 39, 0.9);
   backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(139, 180, 220, 0.1);
+  border-top: 1px solid var(--color-border);
   flex-shrink: 0;
+}
+
+body.theme-warm .bottom-bar {
+  background: rgba(34, 26, 20, 0.9);
 }
 
 .module-toggle {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1.5rem;
-  background: rgba(139, 180, 220, 0.1);
-  border: 1px solid rgba(139, 180, 220, 0.2);
-  border-radius: 50px;
-  color: #c0d0d8;
-  font-size: 0.85rem;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-xl);
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-secondary);
+  font-size: var(--text-subtitle);
   cursor: pointer;
   transition: all 0.3s ease;
   letter-spacing: 1px;
 }
 
 .module-toggle:hover {
-  background: rgba(139, 180, 220, 0.18);
+  background: var(--color-accent-soft);
+  border-color: var(--color-border);
   transform: translateY(-1px);
 }
 
@@ -866,22 +986,28 @@ body.theme-warm .theme-icon-moon {
   transform: rotate(180deg);
 }
 
-/* ===== 底部面板 ===== */
+/* ============================================================
+   Bottom Panel
+   ============================================================ */
 .bottom-panel {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 90;
-  background: rgba(22, 27, 34, 0.7);
+  background: rgba(17, 24, 39, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-radius: 20px 20px 0 0;
-  border-top: 1px solid rgba(139, 180, 220, 0.12);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  border-top: 1px solid var(--color-border);
   transform: translateY(100%);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   max-height: 70vh;
   overflow-y: auto;
+}
+
+body.theme-warm .bottom-panel {
+  background: rgba(34, 26, 20, 0.7);
 }
 
 .bottom-panel.open {
@@ -892,29 +1018,33 @@ body.theme-warm .theme-icon-moon {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.2rem 0.5rem;
+  padding: var(--space-lg) var(--space-lg) var(--space-sm);
   position: sticky;
   top: 0;
-  background: rgba(22, 27, 34, 0.7);
+  background: rgba(17, 24, 39, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   z-index: 2;
 }
 
+body.theme-warm .panel-header {
+  background: rgba(34, 26, 20, 0.7);
+}
+
 .panel-header h3 {
   font-size: 1rem;
   font-weight: 400;
-  color: #e6edf3;
+  color: var(--color-text-primary);
   letter-spacing: 1px;
 }
 
 .panel-close {
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #8b949e;
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-muted);
   font-size: 1rem;
   cursor: pointer;
   display: flex;
@@ -925,43 +1055,43 @@ body.theme-warm .theme-icon-moon {
 
 .panel-close:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: #e6edf3;
+  color: var(--color-text-primary);
 }
 
 .panel-content {
-  padding: 0 1.2rem 2rem;
+  padding: 0 var(--space-lg) var(--space-xl);
 }
 
 .panel-group {
-  margin-bottom: 1.2rem;
+  margin-bottom: var(--space-lg);
 }
 
 .panel-group h4 {
-  font-size: 0.8rem;
+  font-size: var(--text-label);
   font-weight: 400;
-  color: #8b949e;
-  margin-bottom: 0.6rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
   letter-spacing: 1px;
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: var(--space-xs);
 }
 
 .panel-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.6rem;
+  gap: var(--space-sm);
 }
 
 .panel-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.2rem;
-  padding: 0.7rem 0.3rem;
+  gap: 2px;
+  padding: var(--space-md) var(--space-xs);
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
   cursor: pointer;
   transition: all 0.25s ease;
   text-align: center;
@@ -969,14 +1099,14 @@ body.theme-warm .theme-icon-moon {
 }
 
 .panel-item:hover {
-  background: rgba(139, 180, 220, 0.1);
-  border-color: rgba(139, 180, 220, 0.2);
+  background: var(--color-accent-soft);
+  border-color: var(--color-border);
   transform: translateY(-2px);
 }
 
 .panel-item.active {
-  background: rgba(139, 180, 220, 0.12);
-  border-color: rgba(139, 180, 220, 0.3);
+  background: var(--color-accent-soft);
+  border-color: var(--color-border);
 }
 
 .panel-item .pi-icon {
@@ -986,12 +1116,12 @@ body.theme-warm .theme-icon-moon {
 
 .panel-item .pi-title {
   font-size: 0.75rem;
-  color: #c0d0d8;
+  color: var(--color-text-secondary);
 }
 
 .panel-item .pi-desc {
   font-size: 0.6rem;
-  color: #8b949e;
+  color: var(--color-text-muted);
 }
 
 .panel-overlay {
@@ -1009,7 +1139,9 @@ body.theme-warm .theme-icon-moon {
   pointer-events: auto;
 }
 
-/* ===== 庆祝 ===== */
+/* ============================================================
+   Celebration
+   ============================================================ */
 .celebration {
   position: fixed;
   inset: 0;
@@ -1024,8 +1156,8 @@ body.theme-warm .theme-icon-moon {
   position: absolute;
   width: 5px;
   height: 5px;
-  border-radius: 50%;
-  background: rgba(139, 200, 240, 0.6);
+  border-radius: var(--radius-full);
+  background: var(--color-celebration);
   animation: celebrate 1.2s ease-out forwards;
 }
 
@@ -1034,56 +1166,70 @@ body.theme-warm .theme-icon-moon {
   100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
 }
 
-/* ===== 响应式 ===== */
+/* ============================================================
+   Responsive
+   ============================================================ */
 @media (max-width: 480px) {
   .spa-header h1 { font-size: 1.5rem; }
   .mod-title { font-size: 1.25rem; }
   .breath-stage { width: 220px; height: 220px; }
   .breath-circle { width: 110px; height: 110px; }
-  @keyframes inhale { from { width: 110px; height: 110px; } to { width: 170px; height: 170px; } }
-  @keyframes hold { from { width: 170px; height: 170px; } to { width: 170px; height: 170px; } }
-  @keyframes exhale { from { width: 170px; height: 170px; } to { width: 110px; height: 110px; } }
-  @keyframes holdEmpty { from { width: 110px; height: 110px; } to { width: 110px; height: 110px; } }
-  .timer { font-size: 2.2rem; }
+  .breath-timer { font-size: var(--text-timer-small); }
+
+  @keyframes inhale {
+    from { width: 110px; height: 110px; box-shadow: 0 0 25px var(--color-accent-glow); }
+    to { width: 170px; height: 170px; box-shadow: 0 0 45px var(--color-accent-glow); }
+  }
+  @keyframes hold {
+    from { width: 170px; height: 170px; box-shadow: 0 0 45px var(--color-accent-glow); }
+    to { width: 170px; height: 170px; box-shadow: 0 0 45px var(--color-accent-glow); }
+  }
+  @keyframes exhale {
+    from { width: 170px; height: 170px; box-shadow: 0 0 45px var(--color-accent-glow); }
+    to { width: 110px; height: 110px; box-shadow: 0 0 25px var(--color-accent-glow); }
+  }
+  @keyframes holdEmpty {
+    from { width: 110px; height: 110px; }
+    to { width: 110px; height: 110px; }
+  }
+
   .exercise-timer { font-size: 2.5rem; }
   .panel-grid { grid-template-columns: repeat(3, 1fr); }
   .article-content { line-height: 1.7; }
 }
 
-/* ===== PC端全屏适配 ===== */
 @media (min-width: 769px) {
   .spa-body {
     height: 100vh;
     max-height: 100vh;
     overflow: hidden;
   }
-  
+
   .main-stage {
     max-width: 700px;
   }
-  
+
   .module.active {
     justify-content: center;
   }
-  
+
   .breath-stage {
     width: 240px;
     height: 240px;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
   }
-  
+
   .mod-desc {
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .instruction-card {
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
   }
 }
 
-/* ===== 平板适配 ===== */
 @media (min-width: 481px) and (max-width: 768px) {
   .spa-body {
     height: 100vh;
@@ -1093,135 +1239,8 @@ body.theme-warm .theme-icon-moon {
 }
 
 /* ============================================================
-   暖色调主题 (Warm Theme) — 日落感 / Calm App 风格
+   Warm Theme Button Overrides
    ============================================================ */
-
-/* 基础过渡 */
-body, .github-link, .theme-toggle, .bottom-bar, .bottom-panel, .panel-header,
-.btn, .setting-item, .setting-item select, .panel-item, .panel-close,
-.module-toggle, .instruction-card, .stats-bar, .tip-box, .article-content blockquote {
-  transition: background 0.5s ease, border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
-}
-
-/* 背景渐变 */
-body.theme-warm {
-  background: linear-gradient(160deg, #1a1512 0%, #221a14 30%, #2a1f18 50%, #221a14 70%, #1a1512 100%);
-  background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
-  color: #d4c5b5;
-}
-
-/* 粒子 */
-body.theme-warm .particle {
-  background: rgba(200, 160, 120, 0.12);
-}
-
-/* 头部 */
-body.theme-warm .spa-header h1 {
-  color: #f0e6d8;
-}
-
-body.theme-warm .spa-header p {
-  color: #a89080;
-}
-
-/* GitHub & Theme Toggle */
-body.theme-warm .github-link,
-body.theme-warm .theme-toggle {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(200, 160, 120, 0.15);
-  color: #a89080;
-}
-
-body.theme-warm .github-link:hover,
-body.theme-warm .theme-toggle:hover {
-  background: rgba(200, 160, 120, 0.12);
-  border-color: rgba(200, 160, 120, 0.3);
-  color: #d4c5b5;
-}
-
-/* 模块标题 */
-body.theme-warm .mod-title {
-  color: #f0e6d8;
-}
-
-body.theme-warm .mod-subtitle {
-  color: #a89080;
-}
-
-body.theme-warm .mod-desc {
-  color: #b8a898;
-}
-
-/* 呼吸环 */
-body.theme-warm .ring-track circle {
-  stroke: rgba(200, 160, 120, 0.1);
-}
-
-body.theme-warm .ring-progress circle {
-  stroke: url(#ringGradientWarm);
-}
-
-body.theme-warm .breath-circle {
-  background: radial-gradient(circle at 35% 35%, rgba(200, 160, 120, 0.45), rgba(160, 120, 80, 0.2), rgba(120, 80, 50, 0.08));
-  box-shadow: 0 0 25px rgba(160, 120, 80, 0.12), 0 0 50px rgba(160, 120, 80, 0.06), inset 0 0 15px rgba(255, 255, 255, 0.04);
-}
-
-@keyframes inhaleWarm {
-  from { width: 130px; height: 130px; box-shadow: 0 0 25px rgba(160, 120, 80, 0.12); }
-  to { width: 210px; height: 210px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
-}
-@keyframes holdWarm {
-  from { width: 210px; height: 210px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
-  to { width: 210px; height: 210px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
-}
-@keyframes exhaleWarm {
-  from { width: 210px; height: 210px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
-  to { width: 130px; height: 130px; box-shadow: 0 0 25px rgba(160, 120, 80, 0.12); }
-}
-
-body.theme-warm .breath-circle.inhale,
-body.theme-warm .breath-circle.inhale-s5,
-body.theme-warm .breath-circle.inhale-478 {
-  animation-name: inhaleWarm;
-}
-
-body.theme-warm .breath-circle.hold,
-body.theme-warm .breath-circle.hold-s5,
-body.theme-warm .breath-circle.hold-478 {
-  animation-name: holdWarm;
-}
-
-body.theme-warm .breath-circle.exhale,
-body.theme-warm .breath-circle.exhale-s5,
-body.theme-warm .breath-circle.exhale-478 {
-  animation-name: exhaleWarm;
-}
-
-body.theme-warm .breath-label {
-  color: #f0e6d8;
-}
-
-body.theme-warm .timer,
-body.theme-warm .exercise-timer {
-  color: #d4a574;
-}
-
-/* 阶段点 */
-body.theme-warm .phase-dot {
-  background: rgba(200, 160, 120, 0.15);
-}
-
-body.theme-warm .phase-dot.active {
-  background: rgba(220, 180, 130, 0.7);
-  box-shadow: 0 0 8px rgba(220, 180, 130, 0.3);
-}
-
-body.theme-warm .phase-dot.completed {
-  background: rgba(200, 160, 120, 0.35);
-}
-
-/* 按钮 */
 body.theme-warm .btn-start {
   background: linear-gradient(135deg, #8a6a4a, #6a4a2a);
   color: #f0e0c8;
@@ -1242,256 +1261,4 @@ body.theme-warm .btn-restart {
   background: linear-gradient(135deg, #6a5a4a, #4a3a2a);
   color: #e0d0c0;
   box-shadow: 0 4px 20px rgba(74, 58, 42, 0.3);
-}
-
-/* 设置项 */
-body.theme-warm .setting-item {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.06);
-}
-
-body.theme-warm .setting-item label,
-body.theme-warm .toggle-sound span {
-  color: #b8a898;
-}
-
-body.theme-warm .setting-item select {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #d4c5b5;
-}
-
-body.theme-warm .setting-item select option {
-  background: #2a1f18;
-  color: #d4c5b5;
-}
-
-body.theme-warm .toggle-sound input {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-body.theme-warm .toggle-sound input::after {
-  background: #9a7a5a;
-}
-
-body.theme-warm .toggle-sound input:checked {
-  background: rgba(180, 140, 100, 0.25);
-}
-
-body.theme-warm .toggle-sound input:checked::after {
-  background: #d4a574;
-}
-
-/* 统计栏 */
-body.theme-warm .stats-bar {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.04);
-}
-
-body.theme-warm .stat-value {
-  color: #d4a574;
-}
-
-body.theme-warm .stat-label {
-  color: #a89080;
-}
-
-/* 说明卡片 */
-body.theme-warm .instruction-card {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.04);
-}
-
-body.theme-warm .instruction-card h3 {
-  color: #b8a898;
-}
-
-body.theme-warm .flow-step .step-icon {
-  background: rgba(200, 160, 120, 0.1);
-  color: #b8a898;
-}
-
-body.theme-warm .flow-step .step-name {
-  color: #a89080;
-}
-
-body.theme-warm .flow-arrow {
-  color: #8a7a6a;
-}
-
-/* 放松技巧 */
-body.theme-warm .exercise-guide {
-  color: #d4c5b5;
-}
-
-body.theme-warm .eye-shape {
-  border-color: rgba(200, 160, 120, 0.2);
-}
-
-body.theme-warm .eye-shape.resting {
-  border-color: rgba(200, 160, 120, 0.4);
-  box-shadow: 0 0 30px rgba(160, 120, 80, 0.12);
-}
-
-body.theme-warm .eye-pupil {
-  background: radial-gradient(circle at 35% 35%, rgba(220, 180, 130, 0.5), rgba(120, 80, 50, 0.2));
-  border-color: rgba(200, 160, 120, 0.2);
-}
-
-body.theme-warm .neck-head {
-  background: radial-gradient(circle at 40% 40%, rgba(200, 160, 120, 0.2), rgba(120, 80, 50, 0.08));
-  border-color: rgba(200, 160, 120, 0.12);
-}
-
-body.theme-warm .wrist-hand {
-  background: rgba(200, 160, 120, 0.08);
-  border-color: rgba(200, 160, 120, 0.12);
-}
-
-body.theme-warm .scan-body {
-  background: rgba(200, 160, 120, 0.06);
-  border-color: rgba(200, 160, 120, 0.1);
-}
-
-body.theme-warm .scan-head {
-  background: rgba(200, 160, 120, 0.08);
-  border-color: rgba(200, 160, 120, 0.12);
-}
-
-body.theme-warm .scan-beam {
-  background: rgba(220, 180, 130, 0.12);
-  box-shadow: 0 0 15px rgba(220, 180, 130, 0.08);
-}
-
-/* 文章 */
-body.theme-warm .article-content {
-  color: #b8a898;
-}
-
-body.theme-warm .article-content h3 {
-  color: #f0e6d8;
-  border-bottom-color: rgba(200, 160, 120, 0.1);
-}
-
-body.theme-warm .article-content h4 {
-  color: #d4c5b5;
-}
-
-body.theme-warm .article-content strong {
-  color: #f0e6d8;
-}
-
-body.theme-warm .article-content blockquote {
-  border-left-color: rgba(200, 160, 120, 0.25);
-  background: rgba(200, 160, 120, 0.04);
-  color: #d4a574;
-}
-
-body.theme-warm .tip-box {
-  background: rgba(200, 160, 120, 0.05);
-  border-color: rgba(200, 160, 120, 0.1);
-}
-
-body.theme-warm .tip-title {
-  color: #d4a574;
-}
-
-body.theme-warm .article-source {
-  color: #8a7a6a;
-  border-top-color: rgba(200, 160, 120, 0.1);
-}
-
-/* 底部栏 */
-body.theme-warm .bottom-bar {
-  background: rgba(26, 21, 18, 0.9);
-  border-top-color: rgba(200, 160, 120, 0.1);
-}
-
-body.theme-warm .module-toggle {
-  background: rgba(200, 160, 120, 0.1);
-  border-color: rgba(200, 160, 120, 0.2);
-  color: #d4c5b5;
-}
-
-body.theme-warm .module-toggle:hover {
-  background: rgba(200, 160, 120, 0.18);
-}
-
-/* 底部面板 */
-body.theme-warm .bottom-panel {
-  background: rgba(34, 26, 20, 0.7);
-  border-top-color: rgba(200, 160, 120, 0.12);
-}
-
-body.theme-warm .panel-header {
-  background: rgba(34, 26, 20, 0.7);
-}
-
-body.theme-warm .panel-header h3 {
-  color: #f0e6d8;
-}
-
-body.theme-warm .panel-close {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #a89080;
-}
-
-body.theme-warm .panel-close:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #f0e6d8;
-}
-
-body.theme-warm .panel-group h4 {
-  color: #a89080;
-}
-
-body.theme-warm .panel-item {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.06);
-}
-
-body.theme-warm .panel-item:hover {
-  background: rgba(200, 160, 120, 0.1);
-  border-color: rgba(200, 160, 120, 0.2);
-}
-
-body.theme-warm .panel-item.active {
-  background: rgba(200, 160, 120, 0.12);
-  border-color: rgba(200, 160, 120, 0.3);
-}
-
-body.theme-warm .panel-item .pi-title {
-  color: #d4c5b5;
-}
-
-body.theme-warm .panel-item .pi-desc {
-  color: #a89080;
-}
-
-/* 庆祝粒子 */
-body.theme-warm .celebration-particle {
-  background: rgba(220, 180, 130, 0.6);
-}
-
-/* 滚动条 */
-body.theme-warm .module::-webkit-scrollbar-thumb,
-body.theme-warm .article-content::-webkit-scrollbar-thumb {
-  background: rgba(200, 160, 120, 0.15);
-}
-
-/* 响应式暖色呼吸动画 */
-@media (max-width: 480px) {
-  @keyframes inhaleWarm {
-    from { width: 110px; height: 110px; box-shadow: 0 0 25px rgba(160, 120, 80, 0.12); }
-    to { width: 170px; height: 170px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
-  }
-  @keyframes holdWarm {
-    from { width: 170px; height: 170px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
-    to { width: 170px; height: 170px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
-  }
-  @keyframes exhaleWarm {
-    from { width: 170px; height: 170px; box-shadow: 0 0 45px rgba(200, 160, 120, 0.2); }
-    to { width: 110px; height: 110px; box-shadow: 0 0 25px rgba(160, 120, 80, 0.12); }
-  }
 }

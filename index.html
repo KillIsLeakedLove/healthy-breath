@@ -47,10 +47,11 @@
       <div class="breath-stage">
         <svg class="ring-track" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/><defs><linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4a7a9a"/><stop offset="100%" stop-color="#6a9aba"/></linearGradient><linearGradient id="ringGradientWarm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#b8864a"/><stop offset="100%" stop-color="#d4a574"/></linearGradient></defs></svg>
         <svg class="ring-progress" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
-        <div class="breath-circle"></div>
-        <div class="breath-label">准备</div>
+        <div class="breath-circle">
+          <div class="breath-timer">--</div>
+          <div class="breath-label">准备</div>
+        </div>
       </div>
-      <div class="timer">--</div>
       <div class="phase-dots"><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div></div>
       <div class="controls">
         <div class="settings-row">
@@ -71,10 +72,11 @@
       <div class="breath-stage">
         <svg class="ring-track" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
         <svg class="ring-progress" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
-        <div class="breath-circle"></div>
-        <div class="breath-label">准备</div>
+        <div class="breath-circle">
+          <div class="breath-timer">--</div>
+          <div class="breath-label">准备</div>
+        </div>
       </div>
-      <div class="timer">--</div>
       <div class="phase-dots"><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div></div>
       <div class="controls">
         <div class="settings-row">
@@ -95,10 +97,11 @@
       <div class="breath-stage">
         <svg class="ring-track" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
         <svg class="ring-progress" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
-        <div class="breath-circle"></div>
-        <div class="breath-label">准备</div>
+        <div class="breath-circle">
+          <div class="breath-timer">--</div>
+          <div class="breath-label">准备</div>
+        </div>
       </div>
-      <div class="timer">--</div>
       <div class="phase-dots"><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div><div class="phase-dot"></div></div>
       <div class="controls">
         <div class="settings-row">
@@ -119,10 +122,11 @@
       <div class="breath-stage">
         <svg class="ring-track" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
         <svg class="ring-progress" viewBox="0 0 260 260"><circle cx="130" cy="130" r="125"/></svg>
-        <div class="breath-circle"></div>
-        <div class="breath-label">准备</div>
+        <div class="breath-circle">
+          <div class="breath-timer">--</div>
+          <div class="breath-label">准备</div>
+        </div>
       </div>
-      <div class="timer">--</div>
       <div class="phase-dots"><div class="phase-dot"></div><div class="phase-dot"></div></div>
       <div class="controls">
         <div class="settings-row">
@@ -513,7 +517,7 @@
 
         this.circle = container.querySelector('.breath-circle');
         this.label = container.querySelector('.breath-label');
-        this.timer = container.querySelector('.timer');
+        this.timer = container.querySelector('.breath-timer');
         this.btn = container.querySelector('.action-btn');
         this.cycleSelect = container.querySelector('.cycle-select');
         this.ringCircle = container.querySelector('.ring-progress circle');
