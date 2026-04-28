@@ -159,11 +159,19 @@ body {
 /* ============================================================
    GitHub Link & Theme Toggle
    ============================================================ */
-.github-link,
-.theme-toggle {
+/* Top-right actions container */
+.top-actions {
   position: fixed;
   top: var(--space-lg);
+  right: var(--space-lg);
   z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.github-link,
+.theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -177,10 +185,8 @@ body {
   text-decoration: none;
   cursor: pointer;
   padding: 0;
+  position: static;
 }
-
-.github-link { right: var(--space-lg); }
-.theme-toggle { right: 3.2rem; }
 
 .github-link:hover,
 .theme-toggle:hover {
